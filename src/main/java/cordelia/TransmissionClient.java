@@ -8,13 +8,10 @@ import com.google.api.client.json.gson.GsonFactory;
 import cordelia.rpc.Request;
 import cordelia.rpc.Response;
 import cordelia.rpc.method.SessionGet;
-import cordelia.rpc.method.SessionStats;
-import cordelia.rpc.method.TorrentGet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
@@ -88,10 +85,5 @@ public final class TransmissionClient {
             LOG.warn(ex.getMessage(), ex);
         }
         return new Response();
-    }
-
-    public static void main(String[] args) {
-        TransmissionClient cl = new TransmissionClient("http://192.168.55.5:9091/transmission/rpc");
-        LOG.info(cl.execute(new TorrentGet(Arrays.asList("addedDate", "eta"))).toString());
     }
 }
