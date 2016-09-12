@@ -8,10 +8,22 @@ import java.util.Map;
 
 public abstract class Request implements Serializable {
 
+    /**
+     * A required "method" string telling the name of the method to invoke
+     */
     @Key
     protected final String method;
+
+    /**
+     * An optional "arguments" object of key/value pairs
+     */
     @Key
     protected final Map<String, Object> arguments = new HashMap<>();
+
+    /**
+     * An optional "tag" number used by clients to track responses.
+     * If provided by a request, the response MUST include the same tag.
+     */
     @Key
     protected final Integer tag;
 

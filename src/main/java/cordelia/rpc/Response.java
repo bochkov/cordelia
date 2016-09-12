@@ -6,11 +6,22 @@ import java.util.Map;
 
 public final class Response {
 
-    @Key("result")
+    /**
+     * A required "result" string whose value MUST be "success" on success, or an error string on failure.
+     */
+    @Key
     private String result;
-    @Key("arguments")
+
+    /**
+     * An optional "arguments" object of key/value pairs
+     */
+    @Key
     private Map<String, Object> arguments;
-    @Key("tag")
+
+    /**
+     * An optional "tag" number
+     */
+    @Key
     private Integer tag;
 
     public boolean success() {
