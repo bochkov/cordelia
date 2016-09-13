@@ -14,6 +14,7 @@ public final class RenamePath extends Request {
         super(METHOD, tag);
         this.arguments.put("path", path);
         this.arguments.put("name", name);
-        this.arguments.put("ids", ids);
+        if (ids.length != 0)
+            this.arguments.put("ids", ids);
     }
 }

@@ -201,6 +201,7 @@ public final class TorrentGet extends Request {
     public TorrentGet(Integer tag, List<String> fields, Object... ids) {
         super(METHOD, tag);
         this.arguments.put("fields", fields);
-        this.arguments.put("ids", ids);
+        if (ids.length != 0)
+            this.arguments.put("ids", ids);
     }
 }

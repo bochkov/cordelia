@@ -40,6 +40,7 @@ public final class Torrent extends Request {
 
     public Torrent(Integer tag, Action action, Object... ids) {
         super(action.method(), tag);
-        this.arguments.put("ids", ids);
+        if (ids.length != 0)
+            this.arguments.put("ids", ids);
     }
 }

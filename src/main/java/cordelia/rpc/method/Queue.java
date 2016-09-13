@@ -28,7 +28,8 @@ public final class Queue extends Request {
 
     public Queue(Integer tag, To to, Object... ids) {
         super(to.method(), tag);
-        this.arguments.put("ids", ids);
+        if (ids.length != 0)
+            this.arguments.put("ids", ids);
     }
 
 }

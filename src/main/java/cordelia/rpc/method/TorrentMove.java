@@ -14,6 +14,7 @@ public final class TorrentMove extends Request {
         super(METHOD, tag);
         this.arguments.put("location", location);
         this.arguments.put("move", move);
-        this.arguments.put("ids", ids);
+        if (ids.length != 0)
+            this.arguments.put("ids", ids);
     }
 }

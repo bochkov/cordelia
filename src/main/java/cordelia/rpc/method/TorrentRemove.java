@@ -16,7 +16,8 @@ public final class TorrentRemove extends Request {
 
     public TorrentRemove(Integer tag, Boolean withData, Object... ids) {
         super(METHOD, tag);
-        this.arguments.put("ids", ids);
         this.arguments.put("delete-local-data", withData);
+        if (ids.length != 0)
+            this.arguments.put("ids", ids);
     }
 }
