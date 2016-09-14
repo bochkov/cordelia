@@ -10,6 +10,10 @@ public final class TorrentRemove extends Request {
         this(null, false, ids);
     }
 
+    public TorrentRemove(Boolean withData, Object... ids) {
+        this(null, withData, ids);
+    }
+
     public TorrentRemove(Integer tag, Object... ids) {
         this(tag, false, ids);
     }
