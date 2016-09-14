@@ -52,4 +52,12 @@ public abstract class Request implements Serializable {
         return tag;
     }
 
+    @Override
+    public String toString() {
+        return "Request {" +
+                "method='" + method + '\'' +
+                ", arguments=" + arguments +
+                ", tag=" + tag +
+                '}';
+    }
 }
