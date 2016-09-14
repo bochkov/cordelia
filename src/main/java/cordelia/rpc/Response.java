@@ -24,6 +24,10 @@ public final class Response {
     @Key
     private Integer tag;
 
+    public String result() {
+        return result;
+    }
+
     public boolean success() {
         return "success".equals(result);
     }
