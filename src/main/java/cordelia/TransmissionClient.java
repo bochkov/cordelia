@@ -39,8 +39,17 @@ public final class TransmissionClient {
             request.getHeaders().setBasicAuthentication(user, password);
             request.getHeaders().set(SESSION_HEADER, sessionId);
         });
-
-        fetchHeaders();
+        try {
+            HttpRequest req = requestFactory.buildPostRequest(this.url, new JsonHttpContent(jsonFactory, new SessionGet()));
+            req.setUnsuccessfulResponseHandler((request, response, supportsRetry) -> {
+                sessionId = response.getHeaders().getFirstHeaderStringValue(SESSION_HEADER);
+                return false;
+            });
+            req.execute();
+        }
+        catch (IOException ex) {
+            LOG.info("Set new SessionId=" + sessionId);
+        }
         // enableLogging();
     }
 
@@ -61,29 +70,9 @@ public final class TransmissionClient {
         });
     }
 
-    private void fetchHeaders() {
-        try {
-            HttpRequest req = requestFactory.buildPostRequest(url, new JsonHttpContent(jsonFactory, new SessionGet()));
-            req.setUnsuccessfulResponseHandler((request, response, supportsRetry) -> {
-                sessionId = response.getHeaders().getFirstHeaderStringValue(SESSION_HEADER);
-                return false;
-            });
-            req.execute();
-        }
-        catch (IOException ex) {
-            LOG.info("Set new SessionId=" + sessionId);
-        }
-    }
-
-    public Response execute(Request request) {
-        try {
-            HttpRequest req = requestFactory.buildPostRequest(url, new JsonHttpContent(jsonFactory, request));
-            HttpResponse res = req.execute();
-            return jsonFactory.fromInputStream(res.getContent(), Response.class);
-        }
-        catch (IOException ex) {
-            LOG.warn(ex.getMessage(), ex);
-        }
-        return new Response();
+    public Response execute(Request request) throws IOException {
+        HttpRequest req = requestFactory.buildPostRequest(url, new JsonHttpContent(jsonFactory, request));
+        HttpResponse res = req.execute();
+        return jsonFactory.fromInputStream(res.getContent(), Response.class);
     }
 }
