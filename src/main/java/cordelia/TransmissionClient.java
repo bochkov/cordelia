@@ -12,9 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
 
 public final class TransmissionClient {
 
@@ -36,43 +33,29 @@ public final class TransmissionClient {
         this.url = new GenericUrl(url);
         this.jsonFactory = new GsonFactory();
         this.requestFactory = new NetHttpTransport().createRequestFactory(request -> {
-            request.getHeaders().setBasicAuthentication(user, password);
-            request.getHeaders().set(SESSION_HEADER, sessionId);
+            request.getHeaders()
+                    .setBasicAuthentication(user, password)
+                    .set(SESSION_HEADER, sessionId);
         });
         try {
-            HttpRequest req = requestFactory.buildPostRequest(this.url, new JsonHttpContent(jsonFactory, new SessionGet()));
-            req.setUnsuccessfulResponseHandler((request, response, supportsRetry) -> {
-                sessionId = response.getHeaders().getFirstHeaderStringValue(SESSION_HEADER);
-                return false;
-            });
-            req.execute();
-        }
-        catch (IOException ex) {
+            requestFactory
+                    .buildPostRequest(this.url, new JsonHttpContent(jsonFactory, new SessionGet()))
+                    .setUnsuccessfulResponseHandler((request, response, supportsRetry) -> {
+                        sessionId = response.getHeaders().getFirstHeaderStringValue(SESSION_HEADER);
+                        return supportsRetry;
+                    })
+                    .execute();
             LOG.info("Set new SessionId=" + sessionId);
         }
-        // enableLogging();
-    }
-
-    private void enableLogging() {
-        java.util.logging.Logger logger = java.util.logging.Logger.getLogger(HttpTransport.class.getName());
-        logger.setLevel(Level.FINE);
-        logger.addHandler(new Handler() {
-            @Override
-            public void publish(LogRecord record) {
-                LOG.info(record.getMessage(), record.getThrown());
-            }
-
-            @Override
-            public void flush() {}
-
-            @Override
-            public void close() throws SecurityException {}
-        });
+        catch (IOException ex) {
+            LOG.warn(ex.getMessage(), ex);
+        }
     }
 
     public Response execute(Request request) throws IOException {
-        HttpRequest req = requestFactory.buildPostRequest(url, new JsonHttpContent(jsonFactory, request));
-        HttpResponse res = req.execute();
+        HttpResponse res = requestFactory
+                .buildPostRequest(url, new JsonHttpContent(jsonFactory, request))
+                .execute();
         return jsonFactory.fromInputStream(res.getContent(), Response.class);
     }
 }
