@@ -1,27 +1,27 @@
-package cordelia.rpc.method;
+package cordelia.rpc;
 
-import cordelia.rpc.Request;
-
+import java.io.Serializable;
+import java.util.Collections;
 import java.util.Map;
 
 /*
-
    Request arguments: one or more of SessionGet's arguments, except: "blocklist-size",
                       "config-dir", "rpc-version", "rpc-version-minimum", and
                       "version"
-
  */
 
-public final class SessionSet extends Request {
+public final class SessionSet implements Serializable {
 
-    public static final String METHOD = "session-set";
+    private final String method = "session-set";
+    private final Integer tag;
+    private final Map<String, Object> arguments;
 
     public SessionSet(Map<String, Object> options) {
         this(null, options);
     }
 
     public SessionSet(Integer tag, Map<String, Object> options) {
-        super(METHOD, tag);
-        this.arguments.putAll(options);
+        this.tag = tag;
+        this.arguments = Collections.unmodifiableMap(options);
     }
 }

@@ -1,11 +1,12 @@
-package cordelia.rpc.method;
+package cordelia.rpc;
 
-import cordelia.rpc.Request;
-
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /*
-
    Request arguments:
 
    (1) An optional "ids" array as described in 3.1.
@@ -190,18 +191,21 @@ import java.util.List;
 
  */
 
-public final class TorrentGet extends Request {
+public final class TorrentGet implements Serializable {
 
-    public static final String METHOD = "torrent-get";
+    private final String method = "torrent-get";
+    private final Integer tag;
+    private final Map<String, Object> arguments;
 
     public TorrentGet(List<String> fields, Object... ids) {
         this(null, fields, ids);
     }
 
     public TorrentGet(Integer tag, List<String> fields, Object... ids) {
-        super(METHOD, tag);
-        this.arguments.put("fields", fields);
-        if (ids.length != 0)
-            this.arguments.put("ids", ids);
+        this.tag = tag;
+        Map<String, Object> map = new HashMap<>();
+        map.put("fields", fields);
+        map.put("ids", ids);
+        this.arguments = Collections.unmodifiableMap(map);
     }
 }

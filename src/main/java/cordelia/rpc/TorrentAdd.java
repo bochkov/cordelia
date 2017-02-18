@@ -1,11 +1,10 @@
-package cordelia.rpc.method;
+package cordelia.rpc;
 
-import cordelia.rpc.Request;
-
+import java.io.Serializable;
+import java.util.Collections;
 import java.util.Map;
 
 /*
-
    Request arguments:
 
    "cookies"            | string      pointer to a string of one or more cookies.
@@ -35,19 +34,20 @@ import java.util.Map;
 
                        On failure due to a duplicate torrent existing,
                        a "torrent-duplicate" object in the same form.
-
  */
 
-public final class TorrentAdd extends Request {
+public final class TorrentAdd implements Serializable {
 
-    public static final String METHOD = "torrent-add";
+    private final String method = "torrent-add";
+    private final Integer tag;
+    private final Map<String, Object> arguments;
 
     public TorrentAdd(Map<String, Object> options) {
         this(null, options);
     }
 
     public TorrentAdd(Integer tag, Map<String, Object> options) {
-        super(METHOD, tag);
-        this.arguments.putAll(options);
+        this.tag = tag;
+        this.arguments = Collections.unmodifiableMap(options);
     }
 }

@@ -1,9 +1,8 @@
-package cordelia.rpc.method;
+package cordelia.rpc;
 
-import cordelia.rpc.Request;
+import java.io.Serializable;
 
 /*
-
    "alt-speed-down"                 | number     | max global download speed (KBps)
    "alt-speed-enabled"              | boolean    | true means use the alt speeds
    "alt-speed-time-begin"           | number     | when to turn on alt speeds (units: minutes after midnight)
@@ -62,18 +61,18 @@ import cordelia.rpc.Request;
                                     | memory-units | array  | 4 strings: KB/s, MB/s, GB/s, TB/s
                                     | memory-bytes | number | number of bytes in a KB (1000 for kB; 1024 for KiB)
                                     +--------------+--------+------------------+
-
  */
 
-public final class SessionGet extends Request {
+public final class SessionGet implements Serializable {
 
-    public static final String METHOD = "session-get";
+    private final String method = "session-get";
+    private final Integer tag;
 
     public SessionGet() {
         this(null);
     }
 
     public SessionGet(Integer tag) {
-        super(METHOD, tag);
+        this.tag = tag;
     }
 }

@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'cordelia'
-version '1.1.4.RELEASE'
+version '1.2.RELEASE'
 
 apply plugin: 'java'
 apply plugin: 'com.jfrog.artifactory'
@@ -19,8 +19,8 @@ repositories {
 dependencies {
     // GSON and HttpClient
     compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
-    compile group: 'com.google.http-client', name: 'google-http-client', version: '1.20.0'
-    compile group: 'com.google.http-client', name: 'google-http-client-gson', version: '1.20.0'
+    compile group: 'com.jcabi', name: 'jcabi-http', version: '1.16'
+    compile group: 'javax.json', name: 'javax.json-api', version: '1.0'
 
     // Logging
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'

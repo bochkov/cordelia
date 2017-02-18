@@ -1,11 +1,10 @@
-package cordelia.rpc.method;
+package cordelia.rpc;
 
-import cordelia.rpc.Request;
-
+import java.io.Serializable;
+import java.util.Collections;
 import java.util.Map;
 
 /*
-
 Request arguments:
 
    "bandwidthPriority"   | number     this torrent's bandwidth tr_priority_t
@@ -34,19 +33,20 @@ Request arguments:
    Just as an empty "ids" value is shorthand for "all ids", using an empty array
    for "files-wanted", "files-unwanted", "priority-high", "priority-low", or
    "priority-normal" is shorthand for saying "all files".
-
  */
 
-public final class TorrentSet extends Request {
+public final class TorrentSet implements Serializable {
 
-    public static final String METHOD = "torrent-set";
+    private final String method = "torrent-set";
+    private final Integer tag;
+    private final Map<String, Object> arguments;
 
     public TorrentSet(Map<String, Object> options) {
         this(null, options);
     }
 
     public TorrentSet(Integer tag, Map<String, Object> options) {
-        super(METHOD, tag);
-        this.arguments.putAll(options);
+        this.tag = tag;
+        this.arguments = Collections.unmodifiableMap(options);
     }
 }

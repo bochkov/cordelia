@@ -1,28 +1,12 @@
-package cordelia.rpc;
-
-import com.google.api.client.util.Key;
+package cordelia.client;
 
 import java.util.Map;
 
-public final class Response {
+public final class TrResponse {
 
-    /**
-     * A required "result" string whose value MUST be "success" on success, or an error string on failure.
-     */
-    @Key
     private String result;
-
-    /**
-     * An optional "arguments" object of key/value pairs
-     */
-    @Key
     private Map<String, Object> arguments;
-
-    /**
-     * An optional "tag" number
-     */
-    @Key
-    private Integer tag;
+    private String tag;
 
     public String result() {
         return result;
@@ -44,7 +28,7 @@ public final class Response {
         return arguments.getOrDefault(key, defaultValue);
     }
 
-    public Integer tag() {
+    public String tag() {
         return tag;
     }
 
