@@ -47,7 +47,8 @@ public final class Torrent implements Serializable {
         this.method = action.method();
         this.tag = tag;
         Map<String, Object> map = new HashMap<>();
-        map.put("ids", Arrays.asList(ids));
+        if (ids.length > 0)
+            map.put("ids", Arrays.asList(ids));
         this.arguments = Collections.unmodifiableMap(map);
     }
 }

@@ -24,7 +24,8 @@ public final class TorrentRemove implements Serializable {
         this.tag = tag;
         Map<String, Object> map = new HashMap<>();
         map.put("delete-local-data", withData);
-        map.put("ids", Arrays.asList(ids));
+        if (ids.length > 0)
+            map.put("ids", Arrays.asList(ids));
         this.arguments = Collections.unmodifiableMap(map);
     }
 }

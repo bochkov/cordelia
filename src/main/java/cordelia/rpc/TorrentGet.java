@@ -205,7 +205,8 @@ public final class TorrentGet implements Serializable {
         this.tag = tag;
         Map<String, Object> map = new HashMap<>();
         map.put("fields", fields);
-        map.put("ids", ids);
+        if (ids.length > 0)
+            map.put("ids", ids);
         this.arguments = Collections.unmodifiableMap(map);
     }
 }

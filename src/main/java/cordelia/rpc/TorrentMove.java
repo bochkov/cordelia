@@ -21,7 +21,8 @@ public final class TorrentMove implements Serializable {
         Map<String, Object> map = new HashMap<>();
         map.put("location", location);
         map.put("move", move);
-        map.put("ids", Arrays.asList(ids));
+        if (ids.length > 0)
+            map.put("ids", Arrays.asList(ids));
         this.arguments = Collections.unmodifiableMap(map);
     }
 }

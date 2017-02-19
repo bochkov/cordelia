@@ -36,7 +36,8 @@ public final class Queue implements Serializable {
         this.tag = tag;
         this.method = to.method();
         Map<String, Object> map = new HashMap<>();
-        map.put("ids", ids);
+        if (ids.length > 0)
+            map.put("ids", ids);
         this.arguments = Collections.unmodifiableMap(map);
     }
 }
