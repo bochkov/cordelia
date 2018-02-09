@@ -1,8 +1,10 @@
 package cordelia.rpc;
 
+import org.cactoos.list.ListOf;
+import org.cactoos.map.MapEntry;
+import org.cactoos.map.MapOf;
+
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 public final class RenamePath implements Serializable {
@@ -17,10 +19,10 @@ public final class RenamePath implements Serializable {
 
     public RenamePath(Integer tag, Object id, String path, String name) {
         this.tag = tag;
-        Map<String, Object> map = new HashMap<>();
-        map.put("path", path);
-        map.put("name", name);
-        map.put("ids", Collections.singletonList(id));
-        this.arguments = Collections.unmodifiableMap(map);
+        this.arguments = new MapOf<>(
+                new MapEntry<>("path", path),
+                new MapEntry<>("name", name),
+                new MapEntry<>("ids", new ListOf<>(id))
+        );
     }
 }

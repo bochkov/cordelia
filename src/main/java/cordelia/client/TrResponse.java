@@ -34,10 +34,9 @@ public final class TrResponse {
 
     @Override
     public String toString() {
-        return "Response {" +
-                "result='" + result + '\'' +
-                ", arguments=" + arguments +
-                ", tag=" + tag +
-                '}';
+        return String.format(
+                "Response {result='%s', arguments=%s, tag=%s}",
+                result, arguments, tag
+        );
     }
 }

@@ -1,9 +1,10 @@
 package cordelia.rpc;
 
+import org.cactoos.list.ListOf;
+import org.cactoos.map.MapEntry;
+import org.cactoos.map.MapOf;
+
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 /*
@@ -46,9 +47,10 @@ public final class Torrent implements Serializable {
     public Torrent(Integer tag, Action action, Object... ids) {
         this.method = action.method();
         this.tag = tag;
-        Map<String, Object> map = new HashMap<>();
-        if (ids.length > 0)
-            map.put("ids", Arrays.asList(ids));
-        this.arguments = Collections.unmodifiableMap(map);
+        this.arguments = ids.length > 0 ?
+                new MapOf<>(
+                        new MapEntry<>("ids", new ListOf<>(ids))
+                ) :
+                new MapOf<>();
     }
 }

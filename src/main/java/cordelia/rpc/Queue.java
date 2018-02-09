@@ -1,5 +1,8 @@
 package cordelia.rpc;
 
+import org.cactoos.map.MapEntry;
+import org.cactoos.map.MapOf;
+
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
@@ -35,9 +38,10 @@ public final class Queue implements Serializable {
     public Queue(Integer tag, To to, Object... ids) {
         this.tag = tag;
         this.method = to.method();
-        Map<String, Object> map = new HashMap<>();
-        if (ids.length > 0)
-            map.put("ids", ids);
-        this.arguments = Collections.unmodifiableMap(map);
+        this.arguments = ids.length > 0 ?
+                new MapOf<>(
+                        new MapEntry<>("ids", ids)
+                ) :
+                new MapOf<>();
     }
 }

@@ -1,8 +1,9 @@
 package cordelia.rpc;
 
+import org.cactoos.map.MapEntry;
+import org.cactoos.map.MapOf;
+
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 public final class FreeSpace implements Serializable {
@@ -17,8 +18,8 @@ public final class FreeSpace implements Serializable {
 
     public FreeSpace(Integer tag, String path) {
         this.tag = tag;
-        Map<String, String> map = new HashMap<>();
-        map.put("path", path);
-        this.arguments = Collections.unmodifiableMap(map);
+        this.arguments = new MapOf<String, String>(
+                new MapEntry<>("path", path)
+        );
     }
 }

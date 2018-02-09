@@ -1,9 +1,10 @@
 package cordelia.rpc;
 
+import org.cactoos.list.ListOf;
+import org.cactoos.map.MapEntry;
+import org.cactoos.map.MapOf;
+
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 public final class TorrentMove implements Serializable {
@@ -18,11 +19,15 @@ public final class TorrentMove implements Serializable {
 
     public TorrentMove(Integer tag, String location, Boolean move, Object... ids) {
         this.tag = tag;
-        Map<String, Object> map = new HashMap<>();
-        map.put("location", location);
-        map.put("move", move);
-        if (ids.length > 0)
-            map.put("ids", Arrays.asList(ids));
-        this.arguments = Collections.unmodifiableMap(map);
+        this.arguments = ids.length > 0 ?
+                new MapOf<>(
+                        new MapEntry<>("location", location),
+                        new MapEntry<>("move", move),
+                        new MapEntry<>("ids", new ListOf<>(ids))
+                ) :
+                new MapOf<>(
+                        new MapEntry<>("location", location),
+                        new MapEntry<>("move", move)
+                );
     }
 }

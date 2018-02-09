@@ -8,31 +8,39 @@ import com.jcabi.http.wire.RetryWire;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-public final class TrClient {
+public final class TrClient implements Client {
 
     private final String url;
-    private Session cachedSession;
+    private final List<Session> cachedSession = new ArrayList<>();
 
     public TrClient(String url) {
         this.url = url;
     }
 
     private Session session() throws IOException {
-        if (cachedSession == null)
-            cachedSession = new Session(
-                new JdkRequest(url)
-                        .method(Request.POST)
-                        .header("Content-Type", "application/json")
-                        .through(BasicAuthWire.class)
-                        .through(RetryWire.class)
-                        .body().back()
-                        .fetch()
-                        .headers()
-                        .get(Session.SESSION).get(0));
-        return cachedSession;
+        if (cachedSession.isEmpty())
+            cachedSession.add(
+                    new Session(
+                            new JdkRequest(url)
+                                    .method(Request.POST)
+                                    .header("Content-Type", "application/json")
+                                    .through(BasicAuthWire.class)
+                                    .through(RetryWire.class)
+                                    .body().back()
+                                    .fetch()
+                                    .headers()
+                                    .get(Session.SESSION).get(0)
+                    )
+            );
+        return cachedSession.isEmpty() ?
+                new Session() :
+                cachedSession.get(0);
     }
 
+    @Override
     public String post(Serializable serializable) throws IOException {
         return new JdkRequest(url)
                 .method(Request.POST)
@@ -48,6 +56,7 @@ public final class TrClient {
                 .body();
     }
 
+    @Override
     public <T> T post(Serializable serializable, Class<T> type) throws IOException {
         return new JdkRequest(url)
                 .method(Request.POST)

@@ -9,7 +9,7 @@ public final class Session {
     private final String id;
 
     public Session() {
-        this.id = "";
+        this("");
     }
 
     public Session(String id) {

@@ -29,11 +29,8 @@ public final class SessionWire implements Wire {
                          InputStream content,
                          int connect,
                          int read) throws IOException {
-        if (session == null)
-            throw new IOException("no session");
         final Collection<Map.Entry<String, String>> hdrs = new LinkedList<>();
-        for (final Map.Entry<String, String> header : headers)
-            hdrs.add(header);
+        hdrs.addAll(headers);
         hdrs.add(session.header());
         Logger.debug(this, "Using sessionId : %s", session.id());
         return this.origin.send(req, home, method, hdrs, content, connect, read);
