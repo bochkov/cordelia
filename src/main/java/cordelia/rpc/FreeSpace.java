@@ -2,24 +2,38 @@ package cordelia.rpc;
 
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
+import org.cactoos.map.SolidMap;
 
-import java.io.Serializable;
 import java.util.Map;
 
-public final class FreeSpace implements Serializable {
+public final class FreeSpace implements OptReq {
 
-    private final String method = "free-space";
+    private final String method;
     private final Integer tag;
-    private final Map<String, String> arguments;
-
-    public FreeSpace(String path) {
-        this(null, path);
-    }
+    private final Map<String, Object> arguments;
 
     public FreeSpace(Integer tag, String path) {
+        this.method = "free-space";
         this.tag = tag;
-        this.arguments = new MapOf<String, String>(
-                new MapEntry<>("path", path)
+        this.arguments = new SolidMap<>(
+                new MapOf<>(
+                        new MapEntry<>("path", path)
+                )
         );
+    }
+
+    @Override
+    public Map<String, Object> arguments() {
+        return arguments;
+    }
+
+    @Override
+    public String method() {
+        return method;
+    }
+
+    @Override
+    public Integer tag() {
+        return tag;
     }
 }

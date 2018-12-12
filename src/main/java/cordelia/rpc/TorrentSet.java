@@ -1,7 +1,7 @@
 package cordelia.rpc;
 
-import java.io.Serializable;
-import java.util.Collections;
+import org.cactoos.map.SolidMap;
+
 import java.util.Map;
 
 /*
@@ -35,18 +35,30 @@ Request arguments:
    "priority-normal" is shorthand for saying "all files".
  */
 
-public final class TorrentSet implements Serializable {
+public final class TorrentSet implements OptReq {
 
-    private final String method = "torrent-set";
+    private final String method;
     private final Integer tag;
     private final Map<String, Object> arguments;
 
-    public TorrentSet(Map<String, Object> options) {
-        this(null, options);
-    }
-
     public TorrentSet(Integer tag, Map<String, Object> options) {
         this.tag = tag;
-        this.arguments = Collections.unmodifiableMap(options);
+        this.method = "torrent-set";
+        this.arguments = new SolidMap<>(options);
+    }
+
+    @Override
+    public Map<String, Object> arguments() {
+        return arguments;
+    }
+
+    @Override
+    public String method() {
+        return method;
+    }
+
+    @Override
+    public Integer tag() {
+        return tag;
     }
 }

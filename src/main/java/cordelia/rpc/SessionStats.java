@@ -1,7 +1,5 @@
 package cordelia.rpc;
 
-import java.io.Serializable;
-
 /*
    Response arguments:
 
@@ -29,16 +27,23 @@ import java.io.Serializable;
    ---------------------------+-------------------------------+
  */
 
-public final class SessionStats implements Serializable {
+public final class SessionStats implements Req {
 
-    private final String method = "session-stats";
+    private final String method;
     private final Integer tag;
-
-    public SessionStats() {
-        this(null);
-    }
 
     public SessionStats(Integer tag) {
         this.tag = tag;
+        this.method = "session-stats";
+    }
+
+    @Override
+    public String method() {
+        return method;
+    }
+
+    @Override
+    public Integer tag() {
+        return tag;
     }
 }

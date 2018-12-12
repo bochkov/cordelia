@@ -1,7 +1,7 @@
 package cordelia.rpc;
 
-import java.io.Serializable;
-import java.util.Collections;
+import org.cactoos.map.SolidMap;
+
 import java.util.Map;
 
 /*
@@ -36,18 +36,30 @@ import java.util.Map;
                        a "torrent-duplicate" object in the same form.
  */
 
-public final class TorrentAdd implements Serializable {
+public final class TorrentAdd implements OptReq {
 
-    private final String method = "torrent-add";
+    private final String method;
     private final Integer tag;
     private final Map<String, Object> arguments;
 
-    public TorrentAdd(Map<String, Object> options) {
-        this(null, options);
-    }
-
     public TorrentAdd(Integer tag, Map<String, Object> options) {
         this.tag = tag;
-        this.arguments = Collections.unmodifiableMap(options);
+        this.method = "torrent-add";
+        this.arguments = new SolidMap<>(options);
+    }
+
+    @Override
+    public Map<String, Object> arguments() {
+        return arguments;
+    }
+
+    @Override
+    public String method() {
+        return method;
+    }
+
+    @Override
+    public Integer tag() {
+        return tag;
     }
 }

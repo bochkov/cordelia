@@ -1,7 +1,7 @@
 package cordelia.rpc;
 
-import java.io.Serializable;
-import java.util.Collections;
+import org.cactoos.map.SolidMap;
+
 import java.util.Map;
 
 /*
@@ -10,18 +10,30 @@ import java.util.Map;
                       "version"
  */
 
-public final class SessionSet implements Serializable {
+public final class SessionSet implements OptReq {
 
-    private final String method = "session-set";
+    private final String method;
     private final Integer tag;
     private final Map<String, Object> arguments;
 
-    public SessionSet(Map<String, Object> options) {
-        this(null, options);
-    }
-
     public SessionSet(Integer tag, Map<String, Object> options) {
         this.tag = tag;
-        this.arguments = Collections.unmodifiableMap(options);
+        this.method = "session-set";
+        this.arguments = new SolidMap<>(options);
+    }
+
+    @Override
+    public Map<String, Object> arguments() {
+        return arguments;
+    }
+
+    @Override
+    public String method() {
+        return method;
+    }
+
+    @Override
+    public Integer tag() {
+        return tag;
     }
 }

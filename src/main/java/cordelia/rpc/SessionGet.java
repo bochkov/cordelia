@@ -1,7 +1,5 @@
 package cordelia.rpc;
 
-import java.io.Serializable;
-
 /*
    "alt-speed-down"                 | number     | max global download speed (KBps)
    "alt-speed-enabled"              | boolean    | true means use the alt speeds
@@ -63,16 +61,23 @@ import java.io.Serializable;
                                     +--------------+--------+------------------+
  */
 
-public final class SessionGet implements Serializable {
+public final class SessionGet implements Req {
 
-    private final String method = "session-get";
+    private final String method;
     private final Integer tag;
-
-    public SessionGet() {
-        this(null);
-    }
 
     public SessionGet(Integer tag) {
         this.tag = tag;
+        this.method = "session-get";
+    }
+
+    @Override
+    public String method() {
+        return method;
+    }
+
+    @Override
+    public Integer tag() {
+        return tag;
     }
 }

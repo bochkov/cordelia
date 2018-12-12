@@ -1,31 +1,13 @@
 package cordelia.rpc;
 
+import org.cactoos.list.ListOf;
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
+import org.cactoos.map.SolidMap;
 
-import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
-public final class Queue implements Serializable {
-
-    public enum To {
-        TOP("queue-move-top"),
-        UP("queue-move-up"),
-        DOWN("queue-move-down"),
-        BOTTOM("queue-move-bottom");
-
-        private final String method;
-
-        public String method() {
-            return method;
-        }
-
-        To(String method) {
-            this.method = method;
-        }
-    }
+public final class Queue implements OptReq {
 
     private final Integer tag;
     private final String method;
@@ -39,9 +21,45 @@ public final class Queue implements Serializable {
         this.tag = tag;
         this.method = to.method();
         this.arguments = ids.length > 0 ?
-                new MapOf<>(
-                        new MapEntry<>("ids", ids)
+                new SolidMap<>(
+                        new MapOf<>(
+                                new MapEntry<>("ids", new ListOf<>(ids))
+                        )
                 ) :
-                new MapOf<>();
+                new SolidMap<>(
+                        new MapOf<>()
+                );
+    }
+
+    @Override
+    public Map<String, Object> arguments() {
+        return arguments;
+    }
+
+    @Override
+    public String method() {
+        return method;
+    }
+
+    @Override
+    public Integer tag() {
+        return tag;
+    }
+
+    public enum To {
+        TOP("queue-move-top"),
+        UP("queue-move-up"),
+        DOWN("queue-move-down"),
+        BOTTOM("queue-move-bottom");
+
+        private final String method;
+
+        To(String method) {
+            this.method = method;
+        }
+
+        public String method() {
+            return method;
+        }
     }
 }

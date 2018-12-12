@@ -1,17 +1,22 @@
 package cordelia.rpc;
 
-import java.io.Serializable;
+public final class PortCheck implements Req {
 
-public final class PortCheck implements Serializable {
-
-    private final String method = "port-test";
+    private final String method;
     private final Integer tag;
-
-    public PortCheck() {
-        this(null);
-    }
 
     public PortCheck(Integer tag) {
         this.tag = tag;
+        this.method = "port-test";
+    }
+
+    @Override
+    public String method() {
+        return method;
+    }
+
+    @Override
+    public Integer tag() {
+        return tag;
     }
 }

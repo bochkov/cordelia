@@ -1,17 +1,22 @@
 package cordelia.rpc;
 
-import java.io.Serializable;
+public final class SessionClose implements Req {
 
-public final class SessionClose implements Serializable {
-
-    private final String method = "session-close";
+    private final String method;
     private final Integer tag;
-
-    public SessionClose() {
-        this(null);
-    }
 
     public SessionClose(Integer tag) {
         this.tag = tag;
+        this.method = "session-close";
+    }
+
+    @Override
+    public String method() {
+        return method;
+    }
+
+    @Override
+    public Integer tag() {
+        return tag;
     }
 }

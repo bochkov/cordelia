@@ -1,9 +1,10 @@
 package cordelia.rpc;
 
+import org.cactoos.list.ListOf;
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
+import org.cactoos.map.SolidMap;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -192,25 +193,41 @@ import java.util.Map;
 
  */
 
-public final class TorrentGet implements Serializable {
+public final class TorrentGet implements OptReq {
 
-    private final String method = "torrent-get";
+    private final String method;
     private final Integer tag;
     private final Map<String, Object> arguments;
 
-    public TorrentGet(List<String> fields, Object... ids) {
-        this(null, fields, ids);
-    }
-
     public TorrentGet(Integer tag, List<String> fields, Object... ids) {
         this.tag = tag;
+        this.method = "torrent-get";
         this.arguments = ids.length > 0 ?
-                new MapOf<>(
-                        new MapEntry<>("fields", fields),
-                        new MapEntry<>("ids", ids)
+                new SolidMap<>(
+                        new MapOf<>(
+                                new MapEntry<>("fields", fields),
+                                new MapEntry<>("ids", new ListOf<>(ids))
+                        )
                 ) :
-                new MapOf<>(
-                        new MapEntry<>("fields", fields)
+                new SolidMap<>(
+                        new MapOf<>(
+                                new MapEntry<>("fields", fields)
+                        )
                 );
+    }
+
+    @Override
+    public Map<String, Object> arguments() {
+        return arguments;
+    }
+
+    @Override
+    public String method() {
+        return method;
+    }
+
+    @Override
+    public Integer tag() {
+        return tag;
     }
 }
