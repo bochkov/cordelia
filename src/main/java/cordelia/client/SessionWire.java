@@ -29,8 +29,7 @@ public final class SessionWire implements Wire {
                          InputStream content,
                          int connect,
                          int read) throws IOException {
-        final Collection<Map.Entry<String, String>> hdrs = new LinkedList<>();
-        hdrs.addAll(headers);
+        final Collection<Map.Entry<String, String>> hdrs = new LinkedList<>(headers);
         hdrs.add(session.header());
         Logger.debug(this, "Using sessionId : %s", session.id());
         return this.origin.send(req, home, method, hdrs, content, connect, read);
