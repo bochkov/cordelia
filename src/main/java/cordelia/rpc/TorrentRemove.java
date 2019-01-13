@@ -13,6 +13,10 @@ public final class TorrentRemove implements OptReq {
     private final Integer tag;
     private final Map<String, Object> arguments;
 
+    public TorrentRemove(Boolean withData, Object... ids) {
+        this(14, withData, ids);
+    }
+
     public TorrentRemove(Integer tag, Boolean withData, Object... ids) {
         this.tag = tag;
         this.method = "torrent-remove";

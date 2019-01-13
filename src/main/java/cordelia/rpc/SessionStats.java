@@ -32,6 +32,10 @@ public final class SessionStats implements Req {
     private final String method;
     private final Integer tag;
 
+    public SessionStats() {
+        this(9);
+    }
+
     public SessionStats(Integer tag) {
         this.tag = tag;
         this.method = "session-stats";

@@ -16,6 +16,10 @@ public final class SessionSet implements OptReq {
     private final Integer tag;
     private final Map<String, Object> arguments;
 
+    public SessionSet(Map<String, Object> options) {
+        this(8, options);
+    }
+
     public SessionSet(Integer tag, Map<String, Object> options) {
         this.tag = tag;
         this.method = "session-set";

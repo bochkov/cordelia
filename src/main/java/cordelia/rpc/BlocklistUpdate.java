@@ -5,6 +5,10 @@ public final class BlocklistUpdate implements Req {
     private final String method;
     private final Integer tag;
 
+    public BlocklistUpdate() {
+        this(1);
+    }
+
     public BlocklistUpdate(Integer tag) {
         this.tag = tag;
         this.method = "blocklist-update";

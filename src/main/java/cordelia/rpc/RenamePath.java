@@ -13,6 +13,10 @@ public final class RenamePath implements OptReq {
     private final Integer tag;
     private final Map<String, Object> arguments;
 
+    public RenamePath(Object id, String path, String name) {
+        this(5, id, path, name);
+    }
+
     public RenamePath(Integer tag, Object id, String path, String name) {
         this.tag = tag;
         this.method = "torrent-rename-path";

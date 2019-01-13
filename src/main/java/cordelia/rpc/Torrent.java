@@ -22,6 +22,10 @@ public final class Torrent implements OptReq {
     private final Integer tag;
     private final Map<String, Object> arguments;
 
+    public Torrent(Action action, Object... ids) {
+        this(10, action, ids);
+    }
+
     public Torrent(Integer tag, Action action, Object... ids) {
         this.method = action.method();
         this.tag = tag;

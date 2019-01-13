@@ -199,6 +199,10 @@ public final class TorrentGet implements OptReq {
     private final Integer tag;
     private final Map<String, Object> arguments;
 
+    public TorrentGet(List<String> fields, Object... ids) {
+        this(12, fields, ids);
+    }
+
     public TorrentGet(Integer tag, List<String> fields, Object... ids) {
         this.tag = tag;
         this.method = "torrent-get";

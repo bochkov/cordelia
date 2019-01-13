@@ -41,6 +41,10 @@ public final class TorrentSet implements OptReq {
     private final Integer tag;
     private final Map<String, Object> arguments;
 
+    public TorrentSet(Map<String, Object> options) {
+        this(15, options);
+    }
+
     public TorrentSet(Integer tag, Map<String, Object> options) {
         this.tag = tag;
         this.method = "torrent-set";

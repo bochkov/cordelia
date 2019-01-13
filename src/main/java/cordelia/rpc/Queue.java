@@ -14,7 +14,7 @@ public final class Queue implements OptReq {
     private final Map<String, Object> arguments;
 
     public Queue(To to, Object... ids) {
-        this(null, to, ids);
+        this(4, to, ids);
     }
 
     public Queue(Integer tag, To to, Object... ids) {

@@ -66,6 +66,10 @@ public final class SessionGet implements Req {
     private final String method;
     private final Integer tag;
 
+    public SessionGet() {
+        this(7);
+    }
+
     public SessionGet(Integer tag) {
         this.tag = tag;
         this.method = "session-get";

@@ -10,7 +10,7 @@ public class TorrentAddTest {
     @Test
     public void testCtor() {
         OptReq req = new TorrentAdd(4, new MapOf<>(new MapEntry<>("filename", "test")));
-        Assert.assertEquals(new Integer(4), req.tag());
+        Assert.assertEquals(Integer.valueOf(4), req.tag());
         Assert.assertEquals("torrent-add", req.method());
         Assert.assertEquals(
                 "test",
@@ -18,4 +18,9 @@ public class TorrentAddTest {
         );
     }
 
+    @Test
+    public void testCtorNoArgs() {
+        Req req = new TorrentAdd(new MapOf<>(new MapEntry<>("filename", "test")));
+        Assert.assertEquals(Integer.valueOf(11), req.tag());
+    }
 }

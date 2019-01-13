@@ -12,6 +12,10 @@ public final class FreeSpace implements OptReq {
     private final Integer tag;
     private final Map<String, Object> arguments;
 
+    public FreeSpace(String path) {
+        this(2, path);
+    }
+
     public FreeSpace(Integer tag, String path) {
         this.method = "free-space";
         this.tag = tag;

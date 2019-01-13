@@ -10,11 +10,17 @@ public class TorrentTest {
     @Test
     public void testCtor() {
         OptReq req = new Torrent(11, Torrent.Action.START, 12, 15, 16);
-        Assert.assertEquals(new Integer(11), req.tag());
+        Assert.assertEquals(Integer.valueOf(11), req.tag());
         Assert.assertEquals(
                 Arrays.asList(12, 15, 16),
                 req.arguments().get("ids")
         );
+    }
+
+    @Test
+    public void testCtorNoArgs() {
+        Req req = new Torrent(Torrent.Action.START, 12, 15, 16);
+        Assert.assertEquals(Integer.valueOf(10), req.tag());
     }
 
     @Test

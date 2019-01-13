@@ -13,6 +13,10 @@ public final class TorrentMove implements OptReq {
     private final Integer tag;
     private final Map<String, Object> arguments;
 
+    public TorrentMove(String location, Boolean move, Object... ids) {
+        this(13, location, move, ids);
+    }
+
     public TorrentMove(Integer tag, String location, Boolean move, Object... ids) {
         this.tag = tag;
         this.method = "torrent-set-location";

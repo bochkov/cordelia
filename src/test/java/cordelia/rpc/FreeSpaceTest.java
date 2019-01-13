@@ -9,10 +9,16 @@ public class FreeSpaceTest {
     public void testCtor() {
         OptReq req = new FreeSpace(12, "/tmp");
         Assert.assertEquals("free-space", req.method());
-        Assert.assertEquals(new Integer(12), req.tag());
+        Assert.assertEquals(Integer.valueOf(12), req.tag());
         Assert.assertEquals(
                 "/tmp",
                 req.arguments().get("path")
         );
+    }
+
+    @Test
+    public void testCtorNoArgs() {
+        Req req = new FreeSpace("/tmp");
+        Assert.assertEquals(Integer.valueOf(2), req.tag());
     }
 }

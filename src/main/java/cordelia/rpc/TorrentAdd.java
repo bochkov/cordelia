@@ -42,6 +42,10 @@ public final class TorrentAdd implements OptReq {
     private final Integer tag;
     private final Map<String, Object> arguments;
 
+    public TorrentAdd(Map<String, Object> options) {
+        this(11, options);
+    }
+
     public TorrentAdd(Integer tag, Map<String, Object> options) {
         this.tag = tag;
         this.method = "torrent-add";

@@ -10,7 +10,7 @@ public class TorrentMoveTest {
     @Test
     public void testCtor() {
         OptReq req = new TorrentMove(2, "/test/src", true, 10, 11, 12);
-        Assert.assertEquals(new Integer(2), req.tag());
+        Assert.assertEquals(Integer.valueOf(2), req.tag());
         Assert.assertEquals("torrent-set-location", req.method());
         Assert.assertEquals(
                 "/test/src",
@@ -23,4 +23,9 @@ public class TorrentMoveTest {
         );
     }
 
+    @Test
+    public void testCtorNoArgs() {
+        Req req = new TorrentMove("/test/src", true, 10, 11, 12);
+        Assert.assertEquals(Integer.valueOf(13), req.tag());
+    }
 }
