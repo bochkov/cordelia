@@ -5,45 +5,26 @@ import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
 import org.cactoos.map.Solid;
 
-import java.util.Map;
-
-public final class Queue implements OptReq {
-
-    private final Integer tag;
-    private final String method;
-    private final Map<String, Object> arguments;
+public final class Queue extends AbsOptReq {
 
     public Queue(To to, Object... ids) {
         this(4, to, ids);
     }
 
     public Queue(Integer tag, To to, Object... ids) {
-        this.tag = tag;
-        this.method = to.method();
-        this.arguments = ids.length > 0 ?
-                new Solid<>(
-                        new MapOf<>(
-                                new MapEntry<>("ids", new ListOf<>(ids))
+        super(
+                tag,
+                to.method(),
+                ids.length > 0 ?
+                        new Solid<>(
+                                new MapOf<>(
+                                        new MapEntry<>("ids", new ListOf<>(ids))
+                                )
+                        ) :
+                        new Solid<>(
+                                new MapOf<>()
                         )
-                ) :
-                new Solid<>(
-                        new MapOf<>()
-                );
-    }
-
-    @Override
-    public Map<String, Object> arguments() {
-        return arguments;
-    }
-
-    @Override
-    public String method() {
-        return method;
-    }
-
-    @Override
-    public Integer tag() {
-        return tag;
+        );
     }
 
     public enum To {

@@ -61,27 +61,13 @@ package cordelia.rpc;
                                     +--------------+--------+------------------+
  */
 
-public final class SessionGet implements Req {
-
-    private final String method;
-    private final Integer tag;
+public final class SessionGet extends AbsReq {
 
     public SessionGet() {
         this(7);
     }
 
     public SessionGet(Integer tag) {
-        this.tag = tag;
-        this.method = "session-get";
-    }
-
-    @Override
-    public String method() {
-        return method;
-    }
-
-    @Override
-    public Integer tag() {
-        return tag;
+        super(tag, "session-get");
     }
 }

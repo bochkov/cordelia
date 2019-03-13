@@ -10,34 +10,13 @@ import java.util.Map;
                       "version"
  */
 
-public final class SessionSet implements OptReq {
-
-    private final String method;
-    private final Integer tag;
-    private final Map<String, Object> arguments;
+public final class SessionSet extends AbsOptReq {
 
     public SessionSet(Map<String, Object> options) {
         this(8, options);
     }
 
     public SessionSet(Integer tag, Map<String, Object> options) {
-        this.tag = tag;
-        this.method = "session-set";
-        this.arguments = new Solid<>(options);
-    }
-
-    @Override
-    public Map<String, Object> arguments() {
-        return arguments;
-    }
-
-    @Override
-    public String method() {
-        return method;
-    }
-
-    @Override
-    public Integer tag() {
-        return tag;
+        super(tag, "session-set", new Solid<>(options));
     }
 }

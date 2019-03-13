@@ -36,34 +36,13 @@ import java.util.Map;
                        a "torrent-duplicate" object in the same form.
  */
 
-public final class TorrentAdd implements OptReq {
-
-    private final String method;
-    private final Integer tag;
-    private final Map<String, Object> arguments;
+public final class TorrentAdd extends AbsOptReq {
 
     public TorrentAdd(Map<String, Object> options) {
         this(11, options);
     }
 
     public TorrentAdd(Integer tag, Map<String, Object> options) {
-        this.tag = tag;
-        this.method = "torrent-add";
-        this.arguments = new Solid<>(options);
-    }
-
-    @Override
-    public Map<String, Object> arguments() {
-        return arguments;
-    }
-
-    @Override
-    public String method() {
-        return method;
-    }
-
-    @Override
-    public Integer tag() {
-        return tag;
+        super(tag, "torrent-add", new Solid<>(options));
     }
 }

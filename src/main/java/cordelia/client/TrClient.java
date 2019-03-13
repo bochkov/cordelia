@@ -9,31 +9,38 @@ import com.jcabi.http.wire.RetryWire;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
 public final class TrClient implements Client {
 
-    private final String url;
+    private final URI uri;
     private final List<Session> cachedSession = new ArrayList<>();
 
     public TrClient(String url) {
-        this.url = url;
+        this(URI.create(url));
+    }
+
+    public TrClient(URI uri) {
+        this.uri = uri;
     }
 
     private Session session() throws IOException {
         if (cachedSession.isEmpty())
             cachedSession.add(
                     new Session(
-                            new JdkRequest(url)
+                            new JdkRequest(uri)
                                     .method(Request.POST)
                                     .header("Content-Type", "application/json")
                                     .through(BasicAuthWire.class)
                                     .through(RetryWire.class)
-                                    .body().back()
+                                    .body()
+                                    .back()
                                     .fetch()
                                     .headers()
-                                    .get(Session.SESSION_ID).get(0)
+                                    .get(Session.SESSION_ID)
+                                    .get(0)
                     )
             );
         return cachedSession.isEmpty() ?
@@ -42,7 +49,7 @@ public final class TrClient implements Client {
     }
 
     private Response baseReponse(Serializable serializable) throws IOException {
-        return new JdkRequest(url)
+        return new JdkRequest(uri)
                 .method(Request.POST)
                 .header("Content-Type", "application/json")
                 .through(BasicAuthWire.class)

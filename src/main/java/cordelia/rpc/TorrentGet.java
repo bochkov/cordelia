@@ -6,7 +6,6 @@ import org.cactoos.map.MapOf;
 import org.cactoos.map.Solid;
 
 import java.util.List;
-import java.util.Map;
 
 /*
    Request arguments:
@@ -193,45 +192,28 @@ import java.util.Map;
 
  */
 
-public final class TorrentGet implements OptReq {
-
-    private final String method;
-    private final Integer tag;
-    private final Map<String, Object> arguments;
+public final class TorrentGet extends AbsOptReq {
 
     public TorrentGet(List<String> fields, Object... ids) {
         this(12, fields, ids);
     }
 
     public TorrentGet(Integer tag, List<String> fields, Object... ids) {
-        this.tag = tag;
-        this.method = "torrent-get";
-        this.arguments = ids.length > 0 ?
-                new Solid<>(
-                        new MapOf<>(
-                                new MapEntry<>("fields", fields),
-                                new MapEntry<>("ids", new ListOf<>(ids))
+        super(
+                tag,
+                "torrent-get",
+                ids.length > 0 ?
+                        new Solid<>(
+                                new MapOf<>(
+                                        new MapEntry<>("fields", fields),
+                                        new MapEntry<>("ids", new ListOf<>(ids))
+                                )
+                        ) :
+                        new Solid<>(
+                                new MapOf<>(
+                                        new MapEntry<>("fields", fields)
+                                )
                         )
-                ) :
-                new Solid<>(
-                        new MapOf<>(
-                                new MapEntry<>("fields", fields)
-                        )
-                );
-    }
-
-    @Override
-    public Map<String, Object> arguments() {
-        return arguments;
-    }
-
-    @Override
-    public String method() {
-        return method;
-    }
-
-    @Override
-    public Integer tag() {
-        return tag;
+        );
     }
 }

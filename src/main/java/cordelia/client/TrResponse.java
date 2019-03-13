@@ -1,5 +1,7 @@
 package cordelia.client;
 
+import org.cactoos.map.Solid;
+
 import java.util.Map;
 
 public final class TrResponse {
@@ -7,6 +9,12 @@ public final class TrResponse {
     private String result;
     private Map<String, Object> arguments;
     private String tag;
+
+    public TrResponse(String tag, String result, Map<String, Object> arguments) {
+        this.tag = tag;
+        this.result = result;
+        this.arguments = new Solid<>(arguments);
+    }
 
     public String result() {
         return result;

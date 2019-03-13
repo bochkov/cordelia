@@ -35,34 +35,13 @@ Request arguments:
    "priority-normal" is shorthand for saying "all files".
  */
 
-public final class TorrentSet implements OptReq {
-
-    private final String method;
-    private final Integer tag;
-    private final Map<String, Object> arguments;
+public final class TorrentSet extends AbsOptReq {
 
     public TorrentSet(Map<String, Object> options) {
         this(15, options);
     }
 
     public TorrentSet(Integer tag, Map<String, Object> options) {
-        this.tag = tag;
-        this.method = "torrent-set";
-        this.arguments = new Solid<>(options);
-    }
-
-    @Override
-    public Map<String, Object> arguments() {
-        return arguments;
-    }
-
-    @Override
-    public String method() {
-        return method;
-    }
-
-    @Override
-    public Integer tag() {
-        return tag;
+        super(tag, "torrent-set", new Solid<>(options));
     }
 }
