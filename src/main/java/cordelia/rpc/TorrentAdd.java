@@ -1,6 +1,6 @@
 package cordelia.rpc;
 
-import org.cactoos.map.SolidMap;
+import org.cactoos.map.Solid;
 
 import java.util.Map;
 
@@ -49,7 +49,7 @@ public final class TorrentAdd implements OptReq {
     public TorrentAdd(Integer tag, Map<String, Object> options) {
         this.tag = tag;
         this.method = "torrent-add";
-        this.arguments = new SolidMap<>(options);
+        this.arguments = new Solid<>(options);
     }
 
     @Override

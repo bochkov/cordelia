@@ -3,7 +3,7 @@ package cordelia.rpc;
 import org.cactoos.list.ListOf;
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
-import org.cactoos.map.SolidMap;
+import org.cactoos.map.Solid;
 
 import java.util.List;
 import java.util.Map;
@@ -207,13 +207,13 @@ public final class TorrentGet implements OptReq {
         this.tag = tag;
         this.method = "torrent-get";
         this.arguments = ids.length > 0 ?
-                new SolidMap<>(
+                new Solid<>(
                         new MapOf<>(
                                 new MapEntry<>("fields", fields),
                                 new MapEntry<>("ids", new ListOf<>(ids))
                         )
                 ) :
-                new SolidMap<>(
+                new Solid<>(
                         new MapOf<>(
                                 new MapEntry<>("fields", fields)
                         )

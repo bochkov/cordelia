@@ -3,7 +3,7 @@ package cordelia.rpc;
 import org.cactoos.list.ListOf;
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
-import org.cactoos.map.SolidMap;
+import org.cactoos.map.Solid;
 
 import java.util.Map;
 
@@ -21,13 +21,13 @@ public final class TorrentRemove implements OptReq {
         this.tag = tag;
         this.method = "torrent-remove";
         this.arguments = ids.length > 0 ?
-                new SolidMap<>(
+                new Solid<>(
                         new MapOf<>(
                                 new MapEntry<>("delete-local-data", withData),
                                 new MapEntry<>("ids", new ListOf<>(ids))
                         )
                 ) :
-                new SolidMap<>(
+                new Solid<>(
                         new MapOf<>(
                                 new MapEntry<>("delete-local-data", withData)
                         )

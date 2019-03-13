@@ -4,7 +4,7 @@ import com.jcabi.http.ImmutableHeader;
 
 public final class Session {
 
-    public static final String SESSION = "X-Transmission-Session-Id";
+    public static final String SESSION_ID = "X-Transmission-Session-Id";
 
     private final String id;
 
@@ -21,6 +21,6 @@ public final class Session {
     }
 
     public ImmutableHeader header() {
-        return new ImmutableHeader(SESSION, id);
+        return new ImmutableHeader(SESSION_ID, id);
     }
 }

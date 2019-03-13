@@ -13,7 +13,7 @@ import java.util.Map;
 
 public final class SessionWire implements Wire {
 
-    private final transient Wire origin;
+    private final Wire origin;
     private final Session session;
 
     public SessionWire(Wire wire, Session session) {

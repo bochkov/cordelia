@@ -2,7 +2,7 @@ package cordelia.rpc;
 
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
-import org.cactoos.map.SolidMap;
+import org.cactoos.map.Solid;
 
 import java.util.Map;
 
@@ -19,7 +19,7 @@ public final class FreeSpace implements OptReq {
     public FreeSpace(Integer tag, String path) {
         this.method = "free-space";
         this.tag = tag;
-        this.arguments = new SolidMap<>(
+        this.arguments = new Solid<>(
                 new MapOf<>(
                         new MapEntry<>("path", path)
                 )

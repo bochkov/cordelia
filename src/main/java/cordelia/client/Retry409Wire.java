@@ -12,7 +12,7 @@ import java.util.Map;
 
 public final class Retry409Wire implements Wire {
 
-    private final transient Wire origin;
+    private final Wire origin;
 
     public Retry409Wire(Wire wire) {
         this.origin = wire;

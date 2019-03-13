@@ -1,6 +1,6 @@
 package cordelia.rpc;
 
-import org.cactoos.map.SolidMap;
+import org.cactoos.map.Solid;
 
 import java.util.Map;
 
@@ -23,7 +23,7 @@ public final class SessionSet implements OptReq {
     public SessionSet(Integer tag, Map<String, Object> options) {
         this.tag = tag;
         this.method = "session-set";
-        this.arguments = new SolidMap<>(options);
+        this.arguments = new Solid<>(options);
     }
 
     @Override

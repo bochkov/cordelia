@@ -2,6 +2,7 @@ package cordelia.client;
 
 import com.google.gson.Gson;
 import com.jcabi.http.Request;
+import com.jcabi.http.Response;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.wire.BasicAuthWire;
 import com.jcabi.http.wire.RetryWire;
@@ -32,7 +33,7 @@ public final class TrClient implements Client {
                                     .body().back()
                                     .fetch()
                                     .headers()
-                                    .get(Session.SESSION).get(0)
+                                    .get(Session.SESSION_ID).get(0)
                     )
             );
         return cachedSession.isEmpty() ?
@@ -40,8 +41,7 @@ public final class TrClient implements Client {
                 cachedSession.get(0);
     }
 
-    @Override
-    public String post(Serializable serializable) throws IOException {
+    private Response baseReponse(Serializable serializable) throws IOException {
         return new JdkRequest(url)
                 .method(Request.POST)
                 .header("Content-Type", "application/json")
@@ -52,23 +52,17 @@ public final class TrClient implements Client {
                 .body()
                 .set(new Gson().toJson(serializable))
                 .back()
-                .fetch()
-                .body();
+                .fetch();
+    }
+
+    @Override
+    public String post(Serializable serializable) throws IOException {
+        return baseReponse(serializable).body();
     }
 
     @Override
     public <T> T post(Serializable serializable, Class<T> type) throws IOException {
-        return new JdkRequest(url)
-                .method(Request.POST)
-                .header("Content-Type", "application/json")
-                .through(BasicAuthWire.class)
-                .through(SessionWire.class, session())
-                .through(Retry409Wire.class)
-                .through(RetryWire.class)
-                .body()
-                .set(new Gson().toJson(serializable))
-                .back()
-                .fetch()
+        return baseReponse(serializable)
                 .as(GsonResponse.class)
                 .json(type);
     }
