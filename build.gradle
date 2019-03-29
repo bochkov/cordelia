@@ -1,15 +1,13 @@
 plugins {
     id 'com.jfrog.artifactory' version '4.9.3'
-    id 'org.sonarqube' version '2.6'
 }
 
 group = 'cordelia'
-version = '1.2.8.RELEASE'
+version = '1.2.9.RELEASE'
 
 apply plugin: 'java'
 apply plugin: 'com.jfrog.artifactory'
 apply plugin: 'maven-publish'
-apply plugin: 'jacoco'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -17,14 +15,6 @@ targetCompatibility = '1.8'
 repositories {
     jcenter()
 }
-
-jacocoTestReport {
-    reports {
-        xml.enabled = true
-    }
-}
-
-check.dependsOn jacocoTestReport
 
 dependencies {
     // GSON and HttpClient
