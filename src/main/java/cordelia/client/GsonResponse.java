@@ -1,11 +1,12 @@
 package cordelia.client;
 
-import com.google.gson.Gson;
 import com.jcabi.http.Request;
 import com.jcabi.http.Response;
 
 import java.util.List;
 import java.util.Map;
+
+import static cordelia.client.TrClient.GSON;
 
 public final class GsonResponse implements Response {
 
@@ -51,6 +52,6 @@ public final class GsonResponse implements Response {
     }
 
     public <T> T json(Class<T> type) {
-        return new Gson().fromJson(body(), type);
+        return GSON.fromJson(body(), type);
     }
 }

@@ -1,6 +1,7 @@
 package cordelia.client;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jcabi.http.Request;
 import com.jcabi.http.Response;
 import com.jcabi.http.request.JdkRequest;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class TrClient implements Client {
+
+    public static final Gson GSON = new GsonBuilder().create();
 
     private final URI uri;
     private final List<Session> cachedSession = new ArrayList<>();
@@ -57,7 +60,7 @@ public final class TrClient implements Client {
                 .through(Retry409Wire.class)
                 .through(RetryWire.class)
                 .body()
-                .set(new Gson().toJson(serializable))
+                .set(GSON.toJson(serializable))
                 .back()
                 .fetch();
     }
