@@ -4,9 +4,9 @@ jdk:
   - openjdk11
 
 before_install:
-  - echo "artifactory_contextUrl=${AR_URL}" >> ~/.gradle/gradle.properties
-  - echo "artifactory_user=${AR_USER}" >> ~/.gradle/gradle.properties
-  - echo "artifactory_password=${AR_PASSWORD}" >> ~/.gradle/gradle.properties
+  - echo "nexusUrl=${AR_URL}" >> ~/.gradle/gradle.properties
+  - echo "nexusUsername=${AR_USER}" >> ~/.gradle/gradle.properties
+  - echo "nexusPassword=${AR_PASSWORD}" >> ~/.gradle/gradle.properties
 
 deploy:
   provider: releases
@@ -19,4 +19,4 @@ deploy:
     tags: true
 
 after_deploy:
-  - ./gradlew clean build artifactoryPublish
+  - ./gradlew clean build upload
