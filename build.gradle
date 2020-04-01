@@ -1,5 +1,5 @@
 group = 'cordelia'
-version = '1.3.1.RELEASE'
+version = '1.3.2.RELEASE'
 
 apply plugin: 'java'
 apply plugin: 'maven'
@@ -15,8 +15,8 @@ repositories {
 }
 
 dependencies {
-    implementation('org.cactoos:cactoos:0.40')
-    implementation('com.google.code.gson:gson:2.8.5')
+    implementation('org.cactoos:cactoos:0.44')
+    implementation('com.google.code.gson:gson:2.8.6')
     implementation('com.jcabi:jcabi-http:1.17.2')
     implementation('javax.json:javax.json-api:1.1.4')
     
