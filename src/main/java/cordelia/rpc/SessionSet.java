@@ -1,7 +1,5 @@
 package cordelia.rpc;
 
-import org.cactoos.map.Solid;
-
 import java.util.Map;
 
 /*
@@ -17,6 +15,6 @@ public final class SessionSet extends AbsOptReq {
     }
 
     public SessionSet(Integer tag, Map<String, Object> options) {
-        super(tag, "session-set", new Solid<>(options));
+        super(tag, "session-set", options);
     }
 }

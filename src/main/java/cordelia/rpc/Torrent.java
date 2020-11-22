@@ -1,10 +1,7 @@
 package cordelia.rpc;
 
-import org.cactoos.list.ListOf;
-import org.cactoos.map.MapEntry;
-import org.cactoos.map.MapOf;
-
-import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /*
    "ids" specifies which torrents to use.
@@ -26,14 +23,8 @@ public final class Torrent extends AbsOptReq {
                 tag,
                 action.method(),
                 ids.length > 0 ?
-                        Collections.unmodifiableMap(
-                                new MapOf<String, Object>(
-                                        new MapEntry<>("ids", new ListOf<>(ids))
-                                )
-                        ) :
-                        Collections.unmodifiableMap(
-                                new MapOf<>()
-                        )
+                        Map.of("ids", List.of(ids)) :
+                        Map.of()
         );
     }
 
@@ -44,7 +35,7 @@ public final class Torrent extends AbsOptReq {
         VERIFY("torrent-verify"),
         REANNOUNCE("torrent-reannounce");
 
-        private String method;
+        private final String method;
 
         Action(String method) {
             this.method = method;

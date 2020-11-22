@@ -1,5 +1,6 @@
 package cordelia.rpc;
 
+import java.util.Collections;
 import java.util.Map;
 
 public abstract class AbsOptReq extends AbsReq implements OptReq {
@@ -8,7 +9,7 @@ public abstract class AbsOptReq extends AbsReq implements OptReq {
 
     public AbsOptReq(Integer tag, String method, Map<String, Object> args) {
         super(tag, method);
-        this.arguments = args;
+        this.arguments = Collections.unmodifiableMap(args);
     }
 
     @Override

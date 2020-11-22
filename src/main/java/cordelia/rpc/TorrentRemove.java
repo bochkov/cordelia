@@ -1,9 +1,7 @@
 package cordelia.rpc;
 
-import org.cactoos.list.ListOf;
-import org.cactoos.map.MapEntry;
-import org.cactoos.map.MapOf;
-import org.cactoos.map.Solid;
+import java.util.List;
+import java.util.Map;
 
 public final class TorrentRemove extends AbsOptReq {
 
@@ -16,17 +14,11 @@ public final class TorrentRemove extends AbsOptReq {
                 tag,
                 "torrent-remove",
                 ids.length > 0 ?
-                        new Solid<>(
-                                new MapOf<>(
-                                        new MapEntry<>("delete-local-data", withData),
-                                        new MapEntry<>("ids", new ListOf<>(ids))
-                                )
+                        Map.ofEntries(
+                                Map.entry("delete-local-data", withData),
+                                Map.entry("ids", List.of(ids))
                         ) :
-                        new Solid<>(
-                                new MapOf<>(
-                                        new MapEntry<>("delete-local-data", withData)
-                                )
-                        )
+                        Map.of("delete-local-data", withData)
         );
     }
 }

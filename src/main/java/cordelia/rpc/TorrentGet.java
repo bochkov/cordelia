@@ -1,11 +1,7 @@
 package cordelia.rpc;
 
-import org.cactoos.list.ListOf;
-import org.cactoos.map.MapEntry;
-import org.cactoos.map.MapOf;
-import org.cactoos.map.Solid;
-
 import java.util.List;
+import java.util.Map;
 
 /*
    Request arguments:
@@ -203,17 +199,11 @@ public final class TorrentGet extends AbsOptReq {
                 tag,
                 "torrent-get",
                 ids.length > 0 ?
-                        new Solid<>(
-                                new MapOf<>(
-                                        new MapEntry<>("fields", fields),
-                                        new MapEntry<>("ids", new ListOf<>(ids))
-                                )
+                        Map.ofEntries(
+                                Map.entry("fields", fields),
+                                Map.entry("ids", List.of(ids))
                         ) :
-                        new Solid<>(
-                                new MapOf<>(
-                                        new MapEntry<>("fields", fields)
-                                )
-                        )
+                        Map.of("fields", fields)
         );
     }
 }

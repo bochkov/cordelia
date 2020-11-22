@@ -1,9 +1,7 @@
 package cordelia.rpc;
 
-import org.cactoos.list.ListOf;
-import org.cactoos.map.MapEntry;
-import org.cactoos.map.MapOf;
-import org.cactoos.map.Solid;
+import java.util.List;
+import java.util.Map;
 
 public final class RenamePath extends AbsOptReq {
 
@@ -15,12 +13,10 @@ public final class RenamePath extends AbsOptReq {
         super(
                 tag,
                 "torrent-rename-path",
-                new Solid<>(
-                        new MapOf<>(
-                                new MapEntry<>("path", path),
-                                new MapEntry<>("name", name),
-                                new MapEntry<>("ids", new ListOf<>(id))
-                        )
+                Map.ofEntries(
+                        Map.entry("path", path),
+                        Map.entry("name", name),
+                        Map.entry("ids", List.of(id))
                 )
         );
     }

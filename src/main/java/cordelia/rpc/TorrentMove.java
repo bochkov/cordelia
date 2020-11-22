@@ -1,9 +1,7 @@
 package cordelia.rpc;
 
-import org.cactoos.list.ListOf;
-import org.cactoos.map.MapEntry;
-import org.cactoos.map.MapOf;
-import org.cactoos.map.Solid;
+import java.util.List;
+import java.util.Map;
 
 public final class TorrentMove extends AbsOptReq {
 
@@ -16,18 +14,14 @@ public final class TorrentMove extends AbsOptReq {
                 tag,
                 "torrent-set-location",
                 ids.length > 0 ?
-                        new Solid<>(
-                                new MapOf<>(
-                                        new MapEntry<>("location", location),
-                                        new MapEntry<>("move", move),
-                                        new MapEntry<>("ids", new ListOf<>(ids))
-                                )
+                        Map.ofEntries(
+                                Map.entry("location", location),
+                                Map.entry("move", move),
+                                Map.entry("ids", List.of(ids))
                         ) :
-                        new Solid<>(
-                                new MapOf<>(
-                                        new MapEntry<>("location", location),
-                                        new MapEntry<>("move", move)
-                                )
+                        Map.ofEntries(
+                                Map.entry("location", location),
+                                Map.entry("move", move)
                         )
         );
     }

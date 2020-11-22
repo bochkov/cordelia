@@ -1,9 +1,7 @@
 package cordelia.rpc;
 
-import org.cactoos.list.ListOf;
-import org.cactoos.map.MapEntry;
-import org.cactoos.map.MapOf;
-import org.cactoos.map.Solid;
+import java.util.List;
+import java.util.Map;
 
 public final class Queue extends AbsOptReq {
 
@@ -16,14 +14,8 @@ public final class Queue extends AbsOptReq {
                 tag,
                 to.method(),
                 ids.length > 0 ?
-                        new Solid<>(
-                                new MapOf<>(
-                                        new MapEntry<>("ids", new ListOf<>(ids))
-                                )
-                        ) :
-                        new Solid<>(
-                                new MapOf<>()
-                        )
+                        Map.of("ids", List.of(ids)) :
+                        Map.of()
         );
     }
 

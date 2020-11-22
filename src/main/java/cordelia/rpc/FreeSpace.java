@@ -1,8 +1,6 @@
 package cordelia.rpc;
 
-import org.cactoos.map.MapEntry;
-import org.cactoos.map.MapOf;
-import org.cactoos.map.Solid;
+import java.util.Map;
 
 public final class FreeSpace extends AbsOptReq {
 
@@ -14,11 +12,7 @@ public final class FreeSpace extends AbsOptReq {
         super(
                 tag,
                 "free-space",
-                new Solid<>(
-                        new MapOf<>(
-                                new MapEntry<>("path", path)
-                        )
-                )
+                Map.of("path", path)
         );
     }
 }

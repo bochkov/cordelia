@@ -1,6 +1,5 @@
 package cordelia.client;
 
-import com.jcabi.http.ImmutableHeader;
 
 public final class Session {
 
@@ -20,7 +19,4 @@ public final class Session {
         return id;
     }
 
-    public ImmutableHeader header() {
-        return new ImmutableHeader(SESSION_ID, id);
-    }
 }

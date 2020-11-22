@@ -1,19 +1,18 @@
 package cordelia.client;
 
-import org.cactoos.map.Solid;
-
+import java.util.HashMap;
 import java.util.Map;
 
 public final class TrResponse {
 
-    private String result;
-    private Map<String, Object> arguments;
-    private String tag;
+    private final String result;
+    private final Map<String, Object> arguments;
+    private final String tag;
 
     public TrResponse(String tag, String result, Map<String, Object> arguments) {
         this.tag = tag;
         this.result = result;
-        this.arguments = new Solid<>(arguments);
+        this.arguments = new HashMap<>(arguments);
     }
 
     public String result() {
@@ -43,7 +42,7 @@ public final class TrResponse {
     @Override
     public String toString() {
         return String.format(
-                "Response {result='%s', arguments=%s, tag=%s}",
+                "TrResponse {result='%s', arguments=%s, tag=%s}",
                 result, arguments, tag
         );
     }

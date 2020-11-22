@@ -1,7 +1,7 @@
 package cordelia.rpc;
 
-import org.cactoos.map.MapEntry;
-import org.cactoos.map.MapOf;
+import java.util.Map;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,7 +9,7 @@ public class TorrentAddTest {
 
     @Test
     public void testCtor() {
-        OptReq req = new TorrentAdd(4, new MapOf<>(new MapEntry<>("filename", "test")));
+        OptReq req = new TorrentAdd(4, Map.of("filename", "test"));
         Assert.assertEquals(Integer.valueOf(4), req.tag());
         Assert.assertEquals("torrent-add", req.method());
         Assert.assertEquals(
@@ -20,7 +20,7 @@ public class TorrentAddTest {
 
     @Test
     public void testCtorNoArgs() {
-        Req req = new TorrentAdd(new MapOf<>(new MapEntry<>("filename", "test")));
+        Req req = new TorrentAdd(Map.of("filename", "test"));
         Assert.assertEquals(Integer.valueOf(11), req.tag());
     }
 }

@@ -1,7 +1,5 @@
 package cordelia.rpc;
 
-import org.cactoos.map.Solid;
-
 import java.util.Map;
 
 /*
@@ -43,6 +41,6 @@ public final class TorrentAdd extends AbsOptReq {
     }
 
     public TorrentAdd(Integer tag, Map<String, Object> options) {
-        super(tag, "torrent-add", new Solid<>(options));
+        super(tag, "torrent-add", options);
     }
 }
