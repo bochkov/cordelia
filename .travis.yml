@@ -5,9 +5,8 @@ jdk:
 
 before_install:
   - ./gradlew --version
-  - echo "nexusUrl=${AR_URL}" >> $HOME/.gradle/gradle.properties
-  - echo "nexusUsername=${AR_USER}" >> $HOME/.gradle/gradle.properties
-  - echo "nexusPassword=${AR_PASSWORD}" >> $HOME/.gradle/gradle.properties
+  - echo "reposilite_user=${AR_USER}" >> $HOME/.gradle/gradle.properties
+  - echo "reposilite_password=${AR_PASSWORD}" >> $HOME/.gradle/gradle.properties
 
 deploy:
   provider: releases
@@ -20,4 +19,4 @@ deploy:
     tags: true
 
 after_deploy:
-  - ./gradlew clean build upload
+  - ./gradlew clean build publish

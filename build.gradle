@@ -1,8 +1,11 @@
-group = 'cordelia'
-version = '2.0.RELEASE'
+plugins {
+    id 'java'
+    id 'idea'
+    id 'maven-publish'
+}
 
-apply plugin: 'java'
-apply plugin: 'maven'
+group = 'cordelia'
+version = '2.0.1.RELEASE'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -11,35 +14,40 @@ java {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
     maven {
-        url "${nexusUrl}/repository/maven-public/"
+        url "https://maven.sergeybochkov.com"
     }
 }
 
 dependencies {
-    implementation 'com.konghq:unirest-java:3.11.05'
-    implementation 'com.konghq:unirest-objectmapper-jackson:3.11.05'
-    implementation 'ch.qos.logback:logback-classic:1.2.3'
+    implementation 'com.konghq:unirest-java:3.13.6'
+    implementation 'com.konghq:unirest-objectmapper-jackson:3.13.6'
+    implementation 'ch.qos.logback:logback-classic:1.2.10'
 
-    compileOnly 'org.projectlombok:lombok:1.18.16'
-    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
-    testCompileOnly 'org.projectlombok:lombok:1.18.16'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+    testCompileOnly 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
 
-    testImplementation('junit:junit:4.12')
+    testImplementation 'junit:junit:4.13.2'
 }
 
-uploadArchives {
+
+publishing {
     repositories {
-        mavenDeployer {
-            repository(url: "${nexusUrl}/repository/maven-releases") {
-                authentication(userName: nexusUsername, password: nexusPassword)
+        maven {
+            url = "https://maven.sergeybochkov.com/releases"
+            credentials {
+                username = "$reposilite_user"
+                password = "$reposilite_password"
             }
-            snapshotRepository(url: "${nexusUrl}/repository/maven-snapshots") {
-                authentication(userName: nexusUsername, password: nexusPassword)
-            }
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            from components.java
         }
     }
 }
