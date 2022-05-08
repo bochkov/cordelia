@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'cordelia'
-version = '2.0.1.RELEASE'
+version = '2.0.2.RELEASE'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -21,15 +21,15 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.konghq:unirest-java:3.13.6'
-    implementation 'com.konghq:unirest-objectmapper-jackson:3.13.6'
-    implementation 'ch.qos.logback:logback-classic:1.2.10'
+    implementation 'com.konghq:unirest-java:3.13.8'
+    implementation 'com.konghq:unirest-objectmapper-jackson:3.13.8'
+    implementation 'ch.qos.logback:logback-classic:1.2.11'
 
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
-    testCompileOnly 'org.projectlombok:lombok:1.18.22'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
 
     testImplementation 'junit:junit:4.13.2'
 }
