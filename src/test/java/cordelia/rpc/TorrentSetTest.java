@@ -2,25 +2,22 @@ package cordelia.rpc;
 
 import java.util.Map;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class TorrentSetTest {
+class TorrentSetTest {
 
     @Test
-    public void testCtor() {
+    void testCtor() {
         OptReq req = new TorrentSet(12, Map.of("test1", "test2"));
-        Assert.assertEquals(Integer.valueOf(12), req.tag());
-        Assert.assertEquals("torrent-set", req.method());
-        Assert.assertEquals(
-                "test2",
-                req.arguments().get("test1")
-        );
+        Assertions.assertThat(req.tag()).isEqualTo(12);
+        Assertions.assertThat(req.method()).isEqualTo("torrent-set");
+        Assertions.assertThat(req.arguments().get("test1")).isEqualTo("test2");
     }
 
     @Test
-    public void testCtorNoArgs() {
+    void testCtorNoArgs() {
         Req req = new TorrentSet(Map.of("test1", "test2"));
-        Assert.assertEquals(Integer.valueOf(15), req.tag());
+        Assertions.assertThat(req.tag()).isEqualTo(15);
     }
 }

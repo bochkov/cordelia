@@ -1,20 +1,20 @@
 package cordelia.rpc;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class PortCheckTest {
+class PortCheckTest {
 
     @Test
-    public void testCtor() {
+    void testCtor() {
         Req req = new PortCheck(11);
-        Assert.assertEquals(Integer.valueOf(11), req.tag());
-        Assert.assertEquals("port-test", req.method());
+        Assertions.assertThat(req.tag()).isEqualTo(11);
+        Assertions.assertThat(req.method()).isEqualTo("port-test");
     }
 
     @Test
-    public void testCtorNoArgs() {
+    void testCtorNoArgs() {
         Req req = new PortCheck();
-        Assert.assertEquals(Integer.valueOf(3), req.tag());
+        Assertions.assertThat(req.tag()).isEqualTo(3);
     }
 }

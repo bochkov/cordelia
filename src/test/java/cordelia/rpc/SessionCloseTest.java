@@ -1,20 +1,20 @@
 package cordelia.rpc;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class SessionCloseTest {
+class SessionCloseTest {
 
     @Test
-    public void testCtor() {
+    void testCtor() {
         Req req = new SessionClose(15);
-        Assert.assertEquals(Integer.valueOf(15), req.tag());
-        Assert.assertEquals("session-close", req.method());
+        Assertions.assertThat(req.tag()).isEqualTo(15);
+        Assertions.assertThat(req.method()).isEqualTo("session-close");
     }
 
     @Test
-    public void testCtorNoArgs() {
+    void testCtorNoArgs() {
         Req req = new SessionClose();
-        Assert.assertEquals(Integer.valueOf(6), req.tag());
+        Assertions.assertThat(req.tag()).isEqualTo(6);
     }
 }

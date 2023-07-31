@@ -1,27 +1,24 @@
 package cordelia.rpc;
 
-import org.junit.Assert;
-import org.junit.Test;
+import java.util.List;
 
-import java.util.Arrays;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class TorrentRemoveTest {
+class TorrentRemoveTest {
 
     @Test
-    public void testCtor() {
+    void testCtor() {
         OptReq req = new TorrentRemove(12, true, 4, 5, 6);
-        Assert.assertEquals(Integer.valueOf(12), req.tag());
-        Assert.assertEquals("torrent-remove", req.method());
-        Assert.assertTrue((Boolean) req.arguments().get("delete-local-data"));
-        Assert.assertEquals(
-                Arrays.asList(4, 5, 6),
-                req.arguments().get("ids")
-        );
+        Assertions.assertThat(req.tag()).isEqualTo(12);
+        Assertions.assertThat(req.method()).isEqualTo("torrent-remove");
+        Assertions.assertThat(req.arguments().get("delete-local-data")).isEqualTo(Boolean.TRUE);
+        Assertions.assertThat(req.arguments().get("ids")).isEqualTo(List.of(4, 5, 6));
     }
 
     @Test
-    public void testCtorNoArgs() {
+    void testCtorNoArgs() {
         Req req = new TorrentRemove(true, 4, 5, 6);
-        Assert.assertEquals(Integer.valueOf(14), req.tag());
+        Assertions.assertThat(req.tag()).isEqualTo(14);
     }
 }

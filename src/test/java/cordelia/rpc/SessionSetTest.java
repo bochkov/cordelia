@@ -2,25 +2,22 @@ package cordelia.rpc;
 
 import java.util.Map;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class SessionSetTest {
+class SessionSetTest {
 
     @Test
-    public void testCtor() {
+    void testCtor() {
         OptReq req = new SessionSet(9, Map.of("test", "test"));
-        Assert.assertEquals(Integer.valueOf(9), req.tag());
-        Assert.assertEquals("session-set", req.method());
-        Assert.assertEquals(
-                "test",
-                req.arguments().get("test")
-        );
+        Assertions.assertThat(req.tag()).isEqualTo(9);
+        Assertions.assertThat(req.method()).isEqualTo("session-set");
+        Assertions.assertThat(req.arguments().get("test")).isEqualTo("test");
     }
 
     @Test
-    public void testCtorNoArgs() {
+    void testCtorNoArgs() {
         Req req = new SessionSet(Map.of("test", "test"));
-        Assert.assertEquals(Integer.valueOf(8), req.tag());
+        Assertions.assertThat(req.tag()).isEqualTo(8);
     }
 }

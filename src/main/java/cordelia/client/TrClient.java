@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import kong.unirest.Unirest;
+import kong.unirest.core.Unirest;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

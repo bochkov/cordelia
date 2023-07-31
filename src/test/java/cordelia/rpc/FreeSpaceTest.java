@@ -1,24 +1,21 @@
 package cordelia.rpc;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class FreeSpaceTest {
+class FreeSpaceTest {
 
     @Test
-    public void testCtor() {
+    void testCtor() {
         OptReq req = new FreeSpace(12, "/tmp");
-        Assert.assertEquals("free-space", req.method());
-        Assert.assertEquals(Integer.valueOf(12), req.tag());
-        Assert.assertEquals(
-                "/tmp",
-                req.arguments().get("path")
-        );
+        Assertions.assertThat(req.method()).isEqualTo("free-space");
+        Assertions.assertThat(req.tag()).isEqualTo(12);
+        Assertions.assertThat(req.arguments().get("path")).isEqualTo("/tmp");
     }
 
     @Test
-    public void testCtorNoArgs() {
+    void testCtorNoArgs() {
         Req req = new FreeSpace("/tmp");
-        Assert.assertEquals(Integer.valueOf(2), req.tag());
+        Assertions.assertThat(req.tag()).isEqualTo(2);
     }
 }

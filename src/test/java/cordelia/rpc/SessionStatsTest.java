@@ -1,20 +1,20 @@
 package cordelia.rpc;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class SessionStatsTest {
+class SessionStatsTest {
 
     @Test
-    public void testCtor() {
+    void testCtor() {
         Req req = new SessionStats(12);
-        Assert.assertEquals(Integer.valueOf(12), req.tag());
-        Assert.assertEquals("session-stats", req.method());
+        Assertions.assertThat(req.tag()).isEqualTo(12);
+        Assertions.assertThat(req.method()).isEqualTo("session-stats");
     }
 
     @Test
-    public void testCtorNoArgs() {
+    void testCtorNoArgs() {
         Req req = new SessionStats();
-        Assert.assertEquals(Integer.valueOf(9), req.tag());
+        Assertions.assertThat(req.tag()).isEqualTo(9);
     }
 }

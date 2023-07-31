@@ -1,30 +1,24 @@
 package cordelia.rpc;
 
-import org.junit.Assert;
-import org.junit.Test;
+import java.util.List;
 
-import java.util.Arrays;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class TorrentGetTest {
+class TorrentGetTest {
 
     @Test
-    public void testCtor() {
-        OptReq req = new TorrentGet(1, Arrays.asList("field1", "field2"), 10, 11, 12);
-        Assert.assertEquals(Integer.valueOf(1), req.tag());
-        Assert.assertEquals("torrent-get", req.method());
-        Assert.assertEquals(
-                Arrays.asList("field1", "field2"),
-                req.arguments().get("fields")
-        );
-        Assert.assertEquals(
-                Arrays.asList(10, 11, 12),
-                req.arguments().get("ids")
-        );
+    void testCtor() {
+        OptReq req = new TorrentGet(1, List.of("field1", "field2"), 10, 11, 12);
+        Assertions.assertThat(req.tag()).isEqualTo(1);
+        Assertions.assertThat(req.method()).isEqualTo("torrent-get");
+        Assertions.assertThat(req.arguments().get("fields")).isEqualTo(List.of("field1", "field2"));
+        Assertions.assertThat(req.arguments().get("ids")).isEqualTo(List.of(10, 11, 12));
     }
 
     @Test
-    public void testCtorNoArgs() {
-        Req req = new TorrentGet(Arrays.asList("field1", "field2"), 10, 11, 12);
-        Assert.assertEquals(Integer.valueOf(12), req.tag());
+    void testCtorNoArgs() {
+        Req req = new TorrentGet(List.of("field1", "field2"), 10, 11, 12);
+        Assertions.assertThat(req.tag()).isEqualTo(12);
     }
 }

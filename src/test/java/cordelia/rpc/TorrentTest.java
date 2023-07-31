@@ -1,62 +1,59 @@
 package cordelia.rpc;
 
-import org.junit.Assert;
-import org.junit.Test;
+import java.util.List;
 
-import java.util.Arrays;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class TorrentTest {
+class TorrentTest {
 
     @Test
-    public void testCtor() {
+    void testCtor() {
         OptReq req = new Torrent(11, Torrent.Action.START, 12, 15, 16);
-        Assert.assertEquals(Integer.valueOf(11), req.tag());
-        Assert.assertEquals(
-                Arrays.asList(12, 15, 16),
-                req.arguments().get("ids")
-        );
+        Assertions.assertThat(req.tag()).isEqualTo(11);
+        Assertions.assertThat(req.arguments().get("ids")).isEqualTo(List.of(12, 15, 16));
     }
 
     @Test
-    public void testCtorNoArgs() {
+    void testCtorNoArgs() {
         Req req = new Torrent(Torrent.Action.START, 12, 15, 16);
-        Assert.assertEquals(Integer.valueOf(10), req.tag());
+        Assertions.assertThat(req.tag()).isEqualTo(10);
     }
 
     @Test
-    public void testCtor2() {
+    void testCtor2() {
         OptReq req = new Torrent(11, Torrent.Action.START);
-        Assert.assertNotNull(req.arguments());
-        Assert.assertNull(req.arguments().get("ids"));
+        Assertions.assertThat(req.arguments()).isNotNull();
+        Assertions.assertThat(req.arguments().get("ids")).isNull();
     }
 
     @Test
-    public void testStart() {
+    void testStart() {
         OptReq req = new Torrent(12, Torrent.Action.START);
-        Assert.assertEquals("torrent-start", req.method());
+        Assertions.assertThat(req.method()).isEqualTo("torrent-start");
     }
 
     @Test
-    public void testStartNow() {
+    void testStartNow() {
         OptReq req = new Torrent(12, Torrent.Action.START_NOW);
-        Assert.assertEquals("torrent-start-now", req.method());
+        Assertions.assertThat(req.method()).isEqualTo("torrent-start-now");
     }
 
     @Test
-    public void testStop() {
+    void testStop() {
         OptReq req = new Torrent(12, Torrent.Action.STOP);
-        Assert.assertEquals("torrent-stop", req.method());
+        Assertions.assertThat(req.method()).isEqualTo("torrent-stop");
     }
 
     @Test
-    public void testVerify() {
+    void testVerify() {
         OptReq req = new Torrent(12, Torrent.Action.VERIFY);
-        Assert.assertEquals("torrent-verify", req.method());
+        Assertions.assertThat(req.method()).isEqualTo("torrent-verify");
     }
 
     @Test
-    public void testReannounce() {
+    void testReannounce() {
         OptReq req = new Torrent(12, Torrent.Action.REANNOUNCE);
-        Assert.assertEquals("torrent-reannounce", req.method());
+        Assertions.assertThat(req.method()).isEqualTo("torrent-reannounce");
     }
 }

@@ -1,31 +1,25 @@
 package cordelia.rpc;
 
-import org.junit.Assert;
-import org.junit.Test;
+import java.util.List;
 
-import java.util.Arrays;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class TorrentMoveTest {
+class TorrentMoveTest {
 
     @Test
-    public void testCtor() {
+    void testCtor() {
         OptReq req = new TorrentMove(2, "/test/src", true, 10, 11, 12);
-        Assert.assertEquals(Integer.valueOf(2), req.tag());
-        Assert.assertEquals("torrent-set-location", req.method());
-        Assert.assertEquals(
-                "/test/src",
-                req.arguments().get("location")
-        );
-        Assert.assertTrue((Boolean) req.arguments().get("move"));
-        Assert.assertEquals(
-                Arrays.asList(10, 11, 12),
-                req.arguments().get("ids")
-        );
+        Assertions.assertThat(req.tag()).isEqualTo(2);
+        Assertions.assertThat(req.method()).isEqualTo("torrent-set-location");
+        Assertions.assertThat(req.arguments().get("location")).isEqualTo("/test/src");
+        Assertions.assertThat(req.arguments().get("move")).isEqualTo(Boolean.TRUE);
+        Assertions.assertThat(req.arguments().get("ids")).isEqualTo(List.of(10, 11, 12));
     }
 
     @Test
-    public void testCtorNoArgs() {
+    void testCtorNoArgs() {
         Req req = new TorrentMove("/test/src", true, 10, 11, 12);
-        Assert.assertEquals(Integer.valueOf(13), req.tag());
+        Assertions.assertThat(req.tag()).isEqualTo(13);
     }
 }

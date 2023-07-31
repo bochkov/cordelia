@@ -2,25 +2,22 @@ package cordelia.rpc;
 
 import java.util.Map;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class TorrentAddTest {
+class TorrentAddTest {
 
     @Test
-    public void testCtor() {
+    void testCtor() {
         OptReq req = new TorrentAdd(4, Map.of("filename", "test"));
-        Assert.assertEquals(Integer.valueOf(4), req.tag());
-        Assert.assertEquals("torrent-add", req.method());
-        Assert.assertEquals(
-                "test",
-                req.arguments().get("filename")
-        );
+        Assertions.assertThat(req.tag()).isEqualTo(4);
+        Assertions.assertThat(req.method()).isEqualTo("torrent-add");
+        Assertions.assertThat(req.arguments().get("filename")).isEqualTo("test");
     }
 
     @Test
-    public void testCtorNoArgs() {
+    void testCtorNoArgs() {
         Req req = new TorrentAdd(Map.of("filename", "test"));
-        Assert.assertEquals(Integer.valueOf(11), req.tag());
+        Assertions.assertThat(req.tag()).isEqualTo(11);
     }
 }

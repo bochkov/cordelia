@@ -1,58 +1,55 @@
 package cordelia.rpc;
 
-import org.junit.Assert;
-import org.junit.Test;
+import java.util.List;
 
-import java.util.Arrays;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class QueueTest {
+class QueueTest {
 
     @Test
-    public void testArgs() {
+    void testArgs() {
         OptReq req = new Queue(10, Queue.To.TOP, 101, 102, 103);
-        Assert.assertEquals(Integer.valueOf(10), req.tag());
-        Assert.assertEquals(
-                Arrays.asList(101, 102, 103),
-                req.arguments().get("ids")
-        );
+        Assertions.assertThat(req.tag()).isEqualTo(10);
+        Assertions.assertThat(req.arguments().get("ids")).isEqualTo(List.of(101, 102, 103));
     }
 
     @Test
-    public void testCtorNoArgs() {
+    void testCtorNoArgs() {
         Req req = new Queue(Queue.To.TOP, 101, 102, 103);
-        Assert.assertEquals(Integer.valueOf(4), req.tag());
+        Assertions.assertThat(req.tag()).isEqualTo(4);
     }
 
     @Test
-    public void testEmpty() {
+    void testEmpty() {
         OptReq req = new Queue(Queue.To.TOP);
-        Assert.assertNotNull(req.tag());
-        Assert.assertEquals("queue-move-top", req.method());
-        Assert.assertNotNull(req.arguments());
-        Assert.assertNull(req.arguments().get("ids"));
+        Assertions.assertThat(req.tag()).isNotNull();
+        Assertions.assertThat(req.method()).isEqualTo("queue-move-top");
+        Assertions.assertThat(req.arguments()).isNotNull();
+        Assertions.assertThat(req.arguments().get("ids")).isNull();
     }
 
     @Test
-    public void testMethodTop() {
+    void testMethodTop() {
         OptReq req = new Queue(10, Queue.To.TOP, 101, 102, 103);
-        Assert.assertEquals("queue-move-top", req.method());
+        Assertions.assertThat(req.method()).isEqualTo("queue-move-top");
     }
 
     @Test
-    public void testMethodBottom() {
+    void testMethodBottom() {
         OptReq req = new Queue(10, Queue.To.BOTTOM, 101, 102, 103);
-        Assert.assertEquals("queue-move-bottom", req.method());
+        Assertions.assertThat(req.method()).isEqualTo("queue-move-bottom");
     }
 
     @Test
-    public void testMethodUp() {
+    void testMethodUp() {
         OptReq req = new Queue(10, Queue.To.UP, 101, 102, 103);
-        Assert.assertEquals("queue-move-up", req.method());
+        Assertions.assertThat(req.method()).isEqualTo("queue-move-up");
     }
 
     @Test
-    public void testMethodDown() {
+    void testMethodDown() {
         OptReq req = new Queue(10, Queue.To.DOWN, 101, 102, 103);
-        Assert.assertEquals("queue-move-down", req.method());
+        Assertions.assertThat(req.method()).isEqualTo("queue-move-down");
     }
 }

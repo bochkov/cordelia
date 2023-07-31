@@ -1,34 +1,25 @@
 package cordelia.rpc;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.util.Collections;
 
-public class RenamePathTest {
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+class RenamePathTest {
 
     @Test
-    public void testCtor() {
+    void testCtor() {
         OptReq req = new RenamePath(9, 15, "/tmp/dest", "src");
-        Assert.assertEquals(Integer.valueOf(9), req.tag());
-        Assert.assertEquals("torrent-rename-path", req.method());
-        Assert.assertEquals(
-                Collections.singletonList(15),
-                req.arguments().get("ids")
-        );
-        Assert.assertEquals(
-                "/tmp/dest",
-                req.arguments().get("path")
-        );
-        Assert.assertEquals(
-                "src",
-                req.arguments().get("name")
-        );
+        Assertions.assertThat(req.tag()).isEqualTo(9);
+        Assertions.assertThat(req.method()).isEqualTo("torrent-rename-path");
+        Assertions.assertThat(req.arguments().get("ids")).isEqualTo(Collections.singletonList(15));
+        Assertions.assertThat(req.arguments().get("path")).isEqualTo("/tmp/dest");
+        Assertions.assertThat(req.arguments().get("name")).isEqualTo("src");
     }
 
     @Test
-    public void testCtorNoArgs() {
+    void testCtorNoArgs() {
         Req req = new RenamePath(15, "/tmp/dest", "src");
-        Assert.assertEquals(Integer.valueOf(5), req.tag());
+        Assertions.assertThat(req.tag()).isEqualTo(5);
     }
 }
