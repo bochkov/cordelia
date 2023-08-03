@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'cordelia'
-version = '2.0.4.RELEASE'
+version = '5.4.0.RELEASE' // semver from transmission server
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17

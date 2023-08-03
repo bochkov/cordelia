@@ -111,7 +111,7 @@ where <b64 credentials> is equal to a base64 encoded string of the
 username and password (respectively), separated by a colon.
 
 ## 3 Torrent requests
-### 3.1 Torrent action requests
+### 3.1 Torrent torrentAction requests
 | Method name          | libtransmission function
 |:--|:--
 | `torrent-start`      | tr_torrentStart
