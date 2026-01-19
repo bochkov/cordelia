@@ -1,9 +1,9 @@
 package cordelia.rpc;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
+
+import java.util.List;
 
 @Builder
 @ReqMethod(value = "torrent-add", answer = RsTorrentGet.class)

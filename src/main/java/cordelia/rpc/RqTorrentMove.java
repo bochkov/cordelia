@@ -1,8 +1,8 @@
 package cordelia.rpc;
 
-import java.util.List;
-
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @ReqMethod("torrent-move")
 @RequiredArgsConstructor

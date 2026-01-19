@@ -1,31 +1,28 @@
 package cordelia.client;
 
-import java.nio.charset.StandardCharsets;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import cordelia.rpc.RqArguments;
 import cordelia.rpc.RsArguments;
 import kong.unirest.core.Unirest;
-import kong.unirest.jackson.JacksonObjectMapper;
+import kong.unirest.modules.jackson.JacksonObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import tools.jackson.core.StreamWriteFeature;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.MapperFeature;
+import tools.jackson.databind.json.JsonMapper;
+
+import java.nio.charset.StandardCharsets;
 
 @Slf4j
 public final class TrClient {
 
     private final String url;
     private final SessionStore sessionStore = new SessionStore();
-    private final ObjectMapper om = JsonMapper.builder()
+    private final JsonMapper om = JsonMapper.builder()
             .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
-            .serializationInclusion(JsonInclude.Include.NON_NULL)
-            .enable(JsonGenerator.Feature.IGNORE_UNKNOWN)
+            .enable(StreamWriteFeature.IGNORE_UNKNOWN)
             .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-            .addModule(new JavaTimeModule())
+            .changeDefaultPropertyInclusion(pi -> pi.withContentInclusion(JsonInclude.Include.NON_NULL))
             .build();
 
     public TrClient(String url) {

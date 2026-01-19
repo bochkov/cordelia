@@ -11,7 +11,9 @@ final class SessionStore {
     }
 
     boolean isEmpty() {
-        return ref.get() == null || ref.get().id() == null || ref.get().id().isEmpty();
+        return ref.get() == null
+                || ref.get().id() == null
+                || ref.get().id().isEmpty();
     }
 
     Session get() {

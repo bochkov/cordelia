@@ -1,10 +1,10 @@
 package cordelia.rpc;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
 
 @Slf4j
 @Builder

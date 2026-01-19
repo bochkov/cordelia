@@ -1,11 +1,11 @@
 package cordelia.rpc;
 
-import java.util.List;
-import java.util.Map;
-
 import cordelia.client.TypedRequest;
 import cordelia.rpc.types.TorrentAction;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @ReqMethod

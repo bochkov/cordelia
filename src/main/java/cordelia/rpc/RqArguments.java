@@ -1,13 +1,13 @@
 package cordelia.rpc;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import cordelia.client.TypedRequest;
+import lombok.SneakyThrows;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import cordelia.client.TypedRequest;
-import lombok.SneakyThrows;
 
 public interface RqArguments {
 

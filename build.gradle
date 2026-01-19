@@ -2,11 +2,11 @@ plugins {
     id 'java'
     id 'idea'
     id 'maven-publish'
-    id 'com.github.ben-manes.versions' version '0.47.0'
+    id 'com.github.ben-manes.versions' version '0.53.0'
 }
 
 group = 'cordelia'
-version = '5.4.0.RELEASE' // semver from transmission server
+version = '5.5.0.RELEASE'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -17,27 +17,27 @@ java {
 repositories {
     mavenCentral()
     maven {
-        url "https://maven.sergeybochkov.com"
+        url = "https://maven.sergeybochkov.com"
     }
 }
 
 dependencies {
-    implementation platform('com.konghq:unirest-java-bom:4.0.3')
+    implementation platform('com.konghq:unirest-java-bom:4.7.4')
     implementation 'com.konghq:unirest-java-core'
-    implementation 'com.konghq:unirest-objectmapper-jackson'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2'
+    implementation 'com.konghq:unirest-modules-jackson'
+    implementation platform('tools.jackson:jackson-bom:3.0.3')
+    implementation 'tools.jackson.core:jackson-databind'
 
-    compileOnly 'ch.qos.logback:logback-classic:1.4.8'
-    testImplementation 'ch.qos.logback:logback-classic:1.4.8'
+    compileOnly 'ch.qos.logback:logback-classic:1.5.25'
+    testImplementation 'ch.qos.logback:logback-classic:1.5.25'
 
-    compileOnly 'org.projectlombok:lombok:1.18.28'
-    annotationProcessor 'org.projectlombok:lombok:1.18.28'
-    testCompileOnly 'org.projectlombok:lombok:1.18.28'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.28'
+    compileOnly 'org.projectlombok:lombok:1.18.42'
+    annotationProcessor 'org.projectlombok:lombok:1.18.42'
+    testCompileOnly 'org.projectlombok:lombok:1.18.42'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.42'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
-    testImplementation 'org.assertj:assertj-core:3.24.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.2'
+    testImplementation 'org.assertj:assertj-core:3.27.6'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
@@ -58,6 +58,14 @@ publishing {
     publications {
         maven(MavenPublication) {
             from components.java
+        }
+    }
+}
+
+tasks.named('dependencyUpdates').configure {
+    rejectVersionIf {
+        return  ['.*-alpha\\d+', '.*-m\\d+$', '.*-rc\\d+'].any { part ->
+            it.candidate.version.toLowerCase().matches(part)
         }
     }
 }

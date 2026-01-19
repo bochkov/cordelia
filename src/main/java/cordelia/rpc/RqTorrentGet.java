@@ -1,8 +1,8 @@
 package cordelia.rpc;
 
-import java.util.List;
-
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @ReqMethod(value = "torrent-get", answer = RsTorrentGet.class)

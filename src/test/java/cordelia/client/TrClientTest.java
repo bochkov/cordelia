@@ -1,7 +1,5 @@
 package cordelia.client;
 
-import java.util.List;
-
 import cordelia.rpc.*;
 import cordelia.rpc.types.Fields;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +7,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 @Slf4j
 class TrClientTest {

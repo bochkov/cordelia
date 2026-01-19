@@ -1,6 +1,5 @@
 package cordelia.client;
 
-
 public final class Session {
 
     public static final String SESSION_ID = "X-Transmission-Session-Id";
