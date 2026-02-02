@@ -30,7 +30,10 @@ public final class TrClient {
                 .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
                 .enable(StreamWriteFeature.IGNORE_UNKNOWN)
                 .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-                .changeDefaultPropertyInclusion(pi -> pi.withContentInclusion(JsonInclude.Include.NON_NULL))
+                .changeDefaultPropertyInclusion(pi -> pi
+                        .withContentInclusion(JsonInclude.Include.NON_EMPTY)
+                        .withValueInclusion(JsonInclude.Include.NON_NULL)
+                )
                 .build();
         Unirest.config()
                 .setDefaultResponseEncoding(StandardCharsets.UTF_8.name())
