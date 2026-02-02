@@ -17,6 +17,11 @@ public final class RqGroupGet extends RpcRequest<RsGroupGet> {
         this.params = params;
     }
 
+    @Override
+    public Class<RsGroupGet> responseClass() {
+        return RsGroupGet.class;
+    }
+
     @Builder
     public static final class Params {
 

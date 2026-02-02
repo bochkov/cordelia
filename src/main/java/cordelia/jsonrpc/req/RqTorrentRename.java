@@ -16,6 +16,11 @@ public final class RqTorrentRename extends RpcRequest<RsTorrentRename> {
         this.params = params;
     }
 
+    @Override
+    public Class<RsTorrentRename> responseClass() {
+        return RsTorrentRename.class;
+    }
+
     @Builder
     public static final class Params {
 

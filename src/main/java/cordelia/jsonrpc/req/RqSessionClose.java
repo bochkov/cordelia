@@ -7,4 +7,9 @@ public final class RqSessionClose extends RpcRequest<RsEmpty> {
     public RqSessionClose(Long id) {
         super("session_close", id);
     }
+
+    @Override
+    public Class<RsEmpty> responseClass() {
+        return RsEmpty.class;
+    }
 }

@@ -22,6 +22,11 @@ public final class RqTorrentAdd extends RpcRequest<RsTorrentAdd> {
         this.params = params;
     }
 
+    @Override
+    public Class<RsTorrentAdd> responseClass() {
+        return RsTorrentAdd.class;
+    }
+
     @Builder
     public static final class Params {
 

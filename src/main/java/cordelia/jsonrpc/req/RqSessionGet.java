@@ -17,6 +17,11 @@ public final class RqSessionGet extends RpcRequest<RsSessionGet> {
         this.params = params;
     }
 
+    @Override
+    public Class<RsSessionGet> responseClass() {
+        return RsSessionGet.class;
+    }
+
     @Builder
     public static final class Params {
 

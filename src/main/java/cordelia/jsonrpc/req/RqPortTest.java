@@ -17,6 +17,11 @@ public final class RqPortTest extends RpcRequest<RsPortTest> {
         this.params = params;
     }
 
+    @Override
+    public Class<RsPortTest> responseClass() {
+        return RsPortTest.class;
+    }
+
     @Builder
     public static final class Params {
 

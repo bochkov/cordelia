@@ -22,6 +22,11 @@ public abstract class RqTorrent extends RpcRequest<RsEmpty> {
         this.params = params;
     }
 
+    @Override
+    public Class<RsEmpty> responseClass() {
+        return RsEmpty.class;
+    }
+
     @Builder
     public static final class Params {
 

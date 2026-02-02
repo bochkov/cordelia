@@ -3,7 +3,6 @@ package cordelia.client;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import cordelia.jsonrpc.RpcRequest;
 import cordelia.jsonrpc.RpcResponse;
-import kong.unirest.core.GenericType;
 import kong.unirest.core.ObjectMapper;
 import kong.unirest.core.Unirest;
 import kong.unirest.modules.jackson.JacksonObjectMapper;
@@ -47,8 +46,7 @@ public final class TrClient {
         return Unirest.post(url)
                 .header(Session.SESSION_ID, session().getId())
                 .body(req)
-                .asObject(new GenericType<S>() {
-                })
+                .asObject(req.responseClass())
                 .ifSuccess(c ->
                         c.getParsingError().ifPresent(e ->
                                 LOG.debug("body: {}", e.getOriginalBody()))

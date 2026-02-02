@@ -20,6 +20,11 @@ public final class RqTorrentGet extends RpcRequest<RsTorrentGet> {
         this.params = params;
     }
 
+    @Override
+    public Class<RsTorrentGet> responseClass() {
+        return RsTorrentGet.class;
+    }
+
     @Builder
     public static final class Params {
 

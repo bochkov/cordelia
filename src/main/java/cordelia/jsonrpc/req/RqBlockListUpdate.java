@@ -9,4 +9,8 @@ public final class RqBlockListUpdate extends RpcRequest<RsBlocklistUpdate> {
         super("blocklist_update", id);
     }
 
+    @Override
+    public Class<RsBlocklistUpdate> responseClass() {
+        return RsBlocklistUpdate.class;
+    }
 }

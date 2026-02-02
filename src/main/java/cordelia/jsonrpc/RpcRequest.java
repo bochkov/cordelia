@@ -15,4 +15,6 @@ public abstract class RpcRequest<S extends RpcResponse> {
     @JsonProperty
     protected final Long id;
 
+    public abstract Class<S> responseClass();
+
 }

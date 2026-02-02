@@ -15,6 +15,11 @@ public final class RqFreeSpace extends RpcRequest<RsFreeSpace> {
         this.params = params;
     }
 
+    @Override
+    public Class<RsFreeSpace> responseClass() {
+        return RsFreeSpace.class;
+    }
+
     @Builder
     public static final class Params {
 
