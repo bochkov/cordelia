@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'cordelia'
-version = '5.5.0.RELEASE'
+version = '6.0.0.RELEASE'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -25,11 +25,11 @@ dependencies {
     implementation platform('com.konghq:unirest-java-bom:4.7.4')
     implementation 'com.konghq:unirest-java-core'
     implementation 'com.konghq:unirest-modules-jackson'
-    implementation platform('tools.jackson:jackson-bom:3.0.3')
+    implementation platform('tools.jackson:jackson-bom:3.0.4')
     implementation 'tools.jackson.core:jackson-databind'
 
-    compileOnly 'ch.qos.logback:logback-classic:1.5.25'
-    testImplementation 'ch.qos.logback:logback-classic:1.5.25'
+    compileOnly 'ch.qos.logback:logback-classic:1.5.27'
+    testImplementation 'ch.qos.logback:logback-classic:1.5.27'
 
     compileOnly 'org.projectlombok:lombok:1.18.42'
     annotationProcessor 'org.projectlombok:lombok:1.18.42'
@@ -37,7 +37,7 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.42'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:6.0.2'
-    testImplementation 'org.assertj:assertj-core:3.27.6'
+    testImplementation 'org.assertj:assertj-core:3.27.7'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

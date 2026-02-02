@@ -1,8 +1,10 @@
 package cordelia.client;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import cordelia.rpc.RqArguments;
-import cordelia.rpc.RsArguments;
+import cordelia.jsonrpc.RpcRequest;
+import cordelia.jsonrpc.RpcResponse;
+import kong.unirest.core.GenericType;
+import kong.unirest.core.ObjectMapper;
 import kong.unirest.core.Unirest;
 import kong.unirest.modules.jackson.JacksonObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +20,6 @@ public final class TrClient {
 
     private final String url;
     private final SessionStore sessionStore = new SessionStore();
-    private final JsonMapper om = JsonMapper.builder()
-            .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
-            .enable(StreamWriteFeature.IGNORE_UNKNOWN)
-            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-            .changeDefaultPropertyInclusion(pi -> pi.withContentInclusion(JsonInclude.Include.NON_NULL))
-            .build();
 
     public TrClient(String url) {
         this(url, null, null);
@@ -31,6 +27,12 @@ public final class TrClient {
 
     public TrClient(String url, String user, String password) {
         this.url = url;
+        JsonMapper om = JsonMapper.builder()
+                .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
+                .enable(StreamWriteFeature.IGNORE_UNKNOWN)
+                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+                .changeDefaultPropertyInclusion(pi -> pi.withContentInclusion(JsonInclude.Include.NON_NULL))
+                .build();
         Unirest.config()
                 .setDefaultResponseEncoding(StandardCharsets.UTF_8.name())
                 .setDefaultHeader("Content-Type", "application/json")
@@ -41,38 +43,24 @@ public final class TrClient {
         }
     }
 
-    public <E extends RqArguments, S extends RsArguments> TypedResponse<S> execute(E req) {
-        return execute(req, null);
-    }
-
-    public <E extends RqArguments, S extends RsArguments> TypedResponse<S> execute(E req, Long tag) {
-        LOG.debug("using session-id={}", session().id());
+    public <S extends RpcResponse> S execute(RpcRequest<S> req) {
         return Unirest.post(url)
-                .header(Session.SESSION_ID, session().id())
-                .body(req.toReq(tag))
-                .asObject(RawResponse.class)
-                .ifSuccess(response -> {
-                    LOG.debug("ok");
-                    response.getParsingError().ifPresent(e -> LOG.debug("body: {}", e.getOriginalBody()));
+                .header(Session.SESSION_ID, session().getId())
+                .body(req)
+                .asObject(new GenericType<S>() {
                 })
-                .ifFailure(response -> {
-                    LOG.warn("status={}", response.getStatus());
-                    response.getParsingError().ifPresent(e -> {
+                .ifSuccess(c ->
+                        c.getParsingError().ifPresent(e ->
+                                LOG.debug("body: {}", e.getOriginalBody()))
+                )
+                .ifFailure(c -> {
+                    LOG.warn("status = {}", c.getStatus());
+                    c.getParsingError().ifPresent(e -> {
                         LOG.warn("body: {}", e.getOriginalBody());
                         LOG.warn(e.getMessage(), e);
                     });
                 })
-                .map(raw -> new TypedResponse<S>(
-                                raw.getTag(),
-                                raw.getResult(),
-                                om.convertValue(raw.getArguments(), req.answerClass())
-                        )
-                )
                 .getBody();
-    }
-
-    public void shutdown() {
-        Unirest.shutDown();
     }
 
     private Session session() {
@@ -82,7 +70,16 @@ public final class TrClient {
                     .getHeaders()
                     .getFirst(Session.SESSION_ID);
             sessionStore.set(new Session(sessionId));
+            LOG.debug("session-id = {}", sessionId);
         }
         return sessionStore.get();
+    }
+
+    public ObjectMapper om() {
+        return Unirest.config().getObjectMapper();
+    }
+
+    public void shutdown() {
+        Unirest.shutDown();
     }
 }

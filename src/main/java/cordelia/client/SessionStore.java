@@ -6,18 +6,17 @@ final class SessionStore {
 
     private final AtomicReference<Session> ref = new AtomicReference<>(null);
 
-    void set(Session session) {
-        ref.set(session);
-    }
-
     boolean isEmpty() {
         return ref.get() == null
-                || ref.get().id() == null
-                || ref.get().id().isEmpty();
+                || ref.get().getId() == null
+                || ref.get().getId().isEmpty();
+    }
+
+    void set(Session session) {
+        ref.set(session);
     }
 
     Session get() {
         return ref.get();
     }
-
 }

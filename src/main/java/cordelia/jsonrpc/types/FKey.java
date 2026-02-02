@@ -1,0 +1,88 @@
+package cordelia.jsonrpc.types;
+
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class FKey {
+
+    public static final String ACTIVITY_DATE = "activity_date";
+    public static final String ADDED_DATE = "added_date";
+    public static final String AVAILABILITY = "availability";
+    public static final String BANDWIDTH_PRIORITY = "bandwidth_priority";
+    public static final String BYTES_COMPLETED = "bytes_completed";
+    public static final String COMMENT = "comment";
+    public static final String CORRUPT_EVER = "corrupt_ever";
+    public static final String CREATOR = "creator";
+    public static final String DATE_CREATED = "date_created";
+    public static final String DESIRED_AVAILABLE = "desired_available";
+    public static final String DONE_DATE = "done_date";
+    public static final String DOWNLOAD_DIR = "download_dir";
+    public static final String DOWNLOADED_EVER = "downloaded_ever";
+    public static final String DOWNLOAD_LIMIT = "download_limit";
+    public static final String DOWNLOAD_LIMITED = "download_limited";
+    public static final String EDIT_DATE = "edit_date";
+    public static final String ERROR = "error";
+    public static final String ERROR_STRING = "error_string";
+    public static final String ETA = "eta";
+    public static final String ETA_IDLE = "eta_idle";
+    public static final String FILE_COUNT = "file_count";
+    public static final String FILES = "files";
+    public static final String FILE_STATS = "file_stats";
+    public static final String GROUP = "group";
+    public static final String HASH_STRING = "hash_string";
+    public static final String HAVE_UNCHECKED = "have_unchecked";
+    public static final String HAVE_VALID = "have_valid";
+    public static final String HONORS_SESSION_LIMITS = "honors_session_limits";
+    public static final String ID = "id";
+    public static final String IS_FINISHED = "is_finished";
+    public static final String IS_PRIVATE = "is_private";
+    public static final String IS_STALLED = "is_stalled";
+    public static final String LABELS = "labels";
+    public static final String LEFT_UNTIL_DONE = "left_until_done";
+    public static final String MAGNET_LINK = "magnet_link";
+    public static final String MAX_CONNECTED_PEERS = "max_connected_peers";
+    public static final String METADATA_PERCENT_COMPLETE = "metadata_percent_complete";
+    public static final String NAME = "name";
+    public static final String PEER_LIMIT = "peer_limit";
+    public static final String PEERS = "peers";
+    public static final String PEERS_CONNECTED = "peers_connected";
+    public static final String PEERS_FROM = "peers_from";
+    public static final String PEERS_GETTING_FROM_US = "peers_getting_from_us";
+    public static final String PEERS_SENDING_TO_US = "peers_sending_to_us";
+    public static final String PERCENT_COMPLETE = "percent_complete";
+    public static final String PERCENT_DONE = "percent_done";
+    public static final String PIECES = "pieces";
+    public static final String PIECE_COUNT = "piece_count";
+    public static final String PIECE_SIZE = "piece_size";
+    public static final String PRIORITIES = "priorities";
+    public static final String PRIMARY_MIME_TYPE = "primary_mime_type";
+    public static final String QUEUE_POSITION = "queue_position";
+    public static final String RATE_DOWNLOAD = "rate_download";
+    public static final String RATE_UPLOAD = "rate_upload";
+    public static final String RECHECK_PROGRESS = "recheck_progress";
+    public static final String SECONDS_DOWNLOADING = "seconds_downloading";
+    public static final String SECONDS_SEEDING = "seconds_seeding";
+    public static final String SEED_IDLE_LIMIT = "seed_idle_limit";
+    public static final String SEED_IDLE_MODE = "seed_idle_mode";
+    public static final String SEED_RATIO_LIMIT = "seed_ratio_limit";
+    public static final String SEED_RATIO_MODE = "seed_ratio_mode";
+    public static final String SEQUENTIAL_DOWNLOAD = "sequential_download";
+    public static final String SEQUENTIAL_DOWNLOAD_FROM_PIECE = "sequential_download_from_piece";
+    public static final String SIZE_WHEN_DONE = "size_when_done";
+    public static final String START_DATE = "start_date";
+    public static final String STATUS = "status";
+    public static final String TORRENT_FILE = "torrent_file";
+    public static final String TOTAL_SIZE = "total_size";
+    public static final String TRACKERS = "trackers";
+    public static final String TRACKER_LIST = "tracker_list";
+    public static final String TRACKER_STATS = "tracker_stats";
+    public static final String UPLOADED_EVER = "uploaded_ever";
+    public static final String UPLOAD_LIMIT = "upload_limit";
+    public static final String UPLOAD_LIMITED = "upload_limited";
+    public static final String UPLOAD_RATIO = "upload_ratio";
+    public static final String WANTED = "wanted";
+    public static final String WEB_SEEDS = "webseeds";
+    public static final String WEB_SEEDS_SENDING_TO_US = "webseeds_sending_to_us";
+
+}
