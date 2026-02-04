@@ -1,6 +1,7 @@
 package cordelia.jsonrpc.req;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import cordelia.jsonrpc.RpcRequest;
 import cordelia.jsonrpc.req.types.IdleLimit;
 import cordelia.jsonrpc.req.types.Ids;
@@ -76,7 +77,7 @@ public final class RqTorrentSet extends RpcRequest<RsEmpty> {
         /**
          * torrent list
          */
-        @JsonProperty
+        @JsonUnwrapped
         private Ids ids;
 
         /**

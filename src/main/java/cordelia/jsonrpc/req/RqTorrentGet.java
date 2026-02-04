@@ -1,6 +1,7 @@
 package cordelia.jsonrpc.req;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.annotation.JsonValue;
 import cordelia.jsonrpc.RpcRequest;
 import cordelia.jsonrpc.req.types.Ids;
@@ -28,7 +29,7 @@ public final class RqTorrentGet extends RpcRequest<RsTorrentGet> {
     @Builder
     public static final class Params {
 
-        @JsonProperty
+        @JsonUnwrapped
         private Ids ids;
 
         @JsonProperty
